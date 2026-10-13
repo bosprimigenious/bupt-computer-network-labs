@@ -1,0 +1,6 @@
+enable
+configure terminal
+hostname SW
+no ip routing
+no cdp run
+end

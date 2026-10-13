@@ -1,0 +1,18 @@
+system-view
+sysname R3
+interface GigabitEthernet0/0
+ip address 205.161.255.3 255.255.255.0
+undo shutdown
+quit
+interface GigabitEthernet0/1
+ip address 205.161.3.254 255.255.255.0
+undo shutdown
+quit
+ospf 6 router-id 0.0.0.3
+silent-interface GigabitEthernet0/1
+area 0.0.0.0
+network 205.161.255.0 0.0.0.255
+network 205.161.3.0 0.0.0.255
+quit
+quit
+quit

@@ -1,0 +1,16 @@
+enable
+configure terminal
+hostname R1
+no cdp run
+interface FastEthernet0/0
+ip address 10.2.1.1 255.255.255.0
+no shutdown
+exit
+interface Serial1/1
+ip address 10.2.12.1 255.255.255.252
+encapsulation ppp
+clock rate 115200
+no shutdown
+exit
+ip route 10.2.2.0 255.255.255.0 10.2.12.2
+end

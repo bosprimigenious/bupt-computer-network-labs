@@ -1,0 +1,10 @@
+configure
+set system host-name R1
+set routing-options router-id 0.0.0.1
+set interfaces fe-0/0/0 unit 0 family inet address 205.161.255.1/24
+set interfaces fe-0/0/1 unit 0 family inet address 205.161.1.254/24
+set protocols ospf area 0.0.0.0 interface fe-0/0/0.0
+set protocols ospf area 0.0.0.0 interface fe-0/0/1.0 passive
+commit check
+commit
+exit

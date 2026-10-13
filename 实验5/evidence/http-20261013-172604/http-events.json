@@ -1,0 +1,65 @@
+[
+  {
+    "time": 1791883565.011177,
+    "event": "proxy_received",
+    "client": [
+      "127.0.0.1",
+      56487
+    ],
+    "local": [
+      "127.0.0.1",
+      56483
+    ],
+    "request_line": "GET http://127.0.0.1:56482/course/lab5 HTTP/1.1",
+    "headers": {
+      "Accept-Encoding": "identity",
+      "Host": "127.0.0.1:56482",
+      "Connection": "close"
+    }
+  },
+  {
+    "time": 1791883565.011499,
+    "event": "origin_received",
+    "client": [
+      "127.0.0.1",
+      56488
+    ],
+    "local": [
+      "127.0.0.1",
+      56482
+    ],
+    "request_line": "GET /course/lab5 HTTP/1.1",
+    "headers": {
+      "Accept-Encoding": "identity",
+      "Host": "127.0.0.1:56482",
+      "Via": "1.1 our-lab5-proxy",
+      "Connection": "close"
+    }
+  },
+  {
+    "time": 1791883565.011864,
+    "event": "proxy_forwarded",
+    "origin_port": 56482,
+    "status": 200,
+    "upstream_request_line": "GET /course/lab5 HTTP/1.1",
+    "upstream_headers": {
+      "Host": "127.0.0.1:56482",
+      "Via": "1.1 our-lab5-proxy"
+    },
+    "response_body": "our-network-lab5-origin\n"
+  },
+  {
+    "time": 1791883565.01204,
+    "event": "client_received",
+    "request_target": "http://127.0.0.1:56482/course/lab5",
+    "status": 200,
+    "headers": {
+      "Server": "BaseHTTP/0.6 Python/3.14.6",
+      "Date": "Tue, 13 Oct 2026 09:26:05 GMT",
+      "Content-Type": "text/plain",
+      "Content-Length": "24",
+      "Via": "1.1 our-lab5-proxy"
+    },
+    "body": "our-network-lab5-origin\n"
+  }
+]

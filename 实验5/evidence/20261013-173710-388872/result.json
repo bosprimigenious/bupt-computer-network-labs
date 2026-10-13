@@ -1,0 +1,1206 @@
+{
+  "status": "NOT READY",
+  "started_at": "2026-10-13T17:37:10.389358+08:00",
+  "topology": "./实验5/topology.net",
+  "gates": {
+    "expected_devices_and_links": true,
+    "ios_boot": true,
+    "idlepc_calibrated_and_applied": true,
+    "configuration": true,
+    "phase_同网ARP与ICMP": true,
+    "phase_跨网ARP与ICMP": true,
+    "phase_TTL耗尽真实ICMP11": true,
+    "phase_不可达真实ICMP3": true,
+    "phase_静态ARP缓存": true,
+    "phase_清除静态ARP": true,
+    "phase_隔离网内重复IP": true,
+    "phase_恢复唯一地址": true,
+    "real_capture_files": true,
+    "packet_analysis": true,
+    "hook_analyze_capture.py": false,
+    "hook_http_proxy.py": true
+  },
+  "devices": {
+    "SW1": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3004,
+      "configuration_applied": true
+    },
+    "R1": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3005,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+        "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                0   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+      }
+    },
+    "PC1": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3006,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+        "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                0   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                0   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+      }
+    },
+    "PC2": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3007,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+        "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+      }
+    },
+    "PC3": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3008,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+        "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                0   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+      }
+    }
+  },
+  "pings": [
+    {
+      "source": "PC1",
+      "target": "10.5.1.3",
+      "success": true,
+      "rounds": 2,
+      "round": 1,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 32/34/36 ms\r\nPC1#",
+      "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n.!!!!\r\nSuccess rate is 80 percent (4/5), round-trip min/avg/max = 16/31/36 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.5.1.3",
+      "success": true,
+      "rounds": 2,
+      "round": 2,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 16/31/44 ms\r\nPC1#",
+      "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n.!!!!\r\nSuccess rate is 80 percent (4/5), round-trip min/avg/max = 16/31/36 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.5.2.2",
+      "success": true,
+      "rounds": 2,
+      "round": 1,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/73/104 ms\r\nPC1#",
+      "warmup_output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 60/73/92 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.5.2.2",
+      "success": true,
+      "rounds": 2,
+      "round": 2,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/104 ms\r\nPC1#",
+      "warmup_output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 60/73/92 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC3",
+      "target": "10.5.1.2",
+      "success": true,
+      "rounds": 2,
+      "round": 1,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/104 ms\r\nPC3#",
+      "warmup_output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/108 ms\r\nPC3#",
+      "pass": true
+    },
+    {
+      "source": "PC3",
+      "target": "10.5.1.2",
+      "success": true,
+      "rounds": 2,
+      "round": 2,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 40/68/108 ms\r\nPC3#",
+      "warmup_output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/108 ms\r\nPC3#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.99.99.99",
+      "success": false,
+      "rounds": 1,
+      "round": 1,
+      "expected": [
+        0,
+        0,
+        5
+      ],
+      "observed": [
+        0,
+        0,
+        5
+      ],
+      "output": "ping 10.99.99.99\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.99.99.99, timeout is 2 seconds:\r\n.U.U.\r\nSuccess rate is 0 percent (0/5)\r\nPC1#",
+      "warmup_output": "ping 10.99.99.99\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.99.99.99, timeout is 2 seconds:\r\nU.U.U\r\nSuccess rate is 0 percent (0/5)\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.5.1.3",
+      "success": true,
+      "rounds": 2,
+      "round": 1,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 28/36/44 ms\r\nPC1#",
+      "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 20/36/52 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.5.1.3",
+      "success": true,
+      "rounds": 2,
+      "round": 2,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 32/37/48 ms\r\nPC1#",
+      "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 20/36/52 ms\r\nPC1#",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "student_octet": 161,
+  "address_parameter_provisional": false,
+  "specification_sha256": "52bd7f9a05e7ad5f828ba891eaf9c84639a7dbbc247d23c4474e2553787038b9",
+  "sha256": {
+    "topology": "5b535a30c4d25622f5ebb0187d005156f185e6bd3d3ef890dcdb6991195eb6cd",
+    "commands": {
+      "SW1": "4b5ddad25c038b36681eeae05351a5fb549795bb49e332439d3287a5d01b408a",
+      "R1": "40fb5e834a19c6da4a2ed6c61ac64f28dc1bc88c9ee68cd25acc4831c0ac3297",
+      "PC1": "b01148068b73cfc426ee058b3dcb6c2c0922db5f729f6ff1d7edc4cb5605587b",
+      "PC2": "f24009d1f8a3225386c57839124a2060c959d4d1cd77667e6e2ae33dcafcb248",
+      "PC3": "1961965b59d381dcf2fa6ea1de2ef9910e9e07662d3fb4e05cf9a4349d1a3703"
+    },
+    "ios": {
+      "./_环境/ios/unzip-c3640-js-mz.124-10.bin": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
+      "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
+    },
+    "runner": "c2f5b29c1652c07b14155898ea8bd149922d5cf884195ccdbeec2a3f642cc827",
+    "acceptance": "60fc3cf92f66c81d4e4db299a94be714913e80bcadaeca574ce17f4ab08a4cca"
+  },
+  "hypervisor_version": "100-0.2.25-nojit",
+  "links": [
+    [
+      [
+        "PC1",
+        "f0/0"
+      ],
+      [
+        "SW1",
+        "f1/11"
+      ]
+    ],
+    [
+      [
+        "PC2",
+        "f0/0"
+      ],
+      [
+        "SW1",
+        "f1/12"
+      ]
+    ],
+    [
+      [
+        "R1",
+        "f0/0"
+      ],
+      [
+        "SW1",
+        "f1/1"
+      ]
+    ],
+    [
+      [
+        "PC3",
+        "f0/0"
+      ],
+      [
+        "R1",
+        "f1/0"
+      ]
+    ]
+  ],
+  "captures": [
+    {
+      "nio": "link0_0",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "name": "client-lan"
+    },
+    {
+      "nio": "link3_0",
+      "path": "./实验5/evidence/20261013-173710-388872/remote-lan.pcap",
+      "name": "remote-lan"
+    }
+  ],
+  "idlepc": {
+    "./_环境/ios/unzip-c3640-js-mz.124-10.bin": {
+      "representative": "SW1",
+      "devices": [
+        "SW1",
+        "R1"
+      ],
+      "raw_output": "101 0x604f1488 [1]\n101 0x604f148c [2]\n101 0x604f1490 [3]\n101 0x604f1494 [10]\n101 0x604f1538 [1]\n101 0x604f153c [3]\n101 0x604f1540 [3]\n101 0x604b99e8 [16]\n101 0x604eaf94 [3]\n101 0x604eaf98 [5]\n100-OK",
+      "candidates": [
+        {
+          "pc": "0x604f1488",
+          "count": 1
+        },
+        {
+          "pc": "0x604f148c",
+          "count": 2
+        },
+        {
+          "pc": "0x604f1490",
+          "count": 3
+        },
+        {
+          "pc": "0x604f1494",
+          "count": 10
+        },
+        {
+          "pc": "0x604f1538",
+          "count": 1
+        },
+        {
+          "pc": "0x604f153c",
+          "count": 3
+        },
+        {
+          "pc": "0x604f1540",
+          "count": 3
+        },
+        {
+          "pc": "0x604b99e8",
+          "count": 16
+        },
+        {
+          "pc": "0x604eaf94",
+          "count": 3
+        },
+        {
+          "pc": "0x604eaf98",
+          "count": 5
+        }
+      ],
+      "selected": {
+        "pc": "0x604b99e8",
+        "count": 16
+      },
+      "applied_responses": {
+        "SW1": "100-OK",
+        "R1": "100-OK"
+      }
+    },
+    "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": {
+      "representative": "PC1",
+      "devices": [
+        "PC1",
+        "PC2",
+        "PC3"
+      ],
+      "raw_output": "101 0x80348408 [1]\n101 0x802c067c [7]\n101 0x802c0680 [1]\n101 0x802c0684 [7]\n101 0x802c0688 [5]\n101 0x802c068c [3]\n101 0x802c0690 [2]\n101 0x802c0694 [7]\n101 0x802c0698 [2]\n101 0x802c069c [3]\n100-OK",
+      "candidates": [
+        {
+          "pc": "0x80348408",
+          "count": 1
+        },
+        {
+          "pc": "0x802c067c",
+          "count": 7
+        },
+        {
+          "pc": "0x802c0680",
+          "count": 1
+        },
+        {
+          "pc": "0x802c0684",
+          "count": 7
+        },
+        {
+          "pc": "0x802c0688",
+          "count": 5
+        },
+        {
+          "pc": "0x802c068c",
+          "count": 3
+        },
+        {
+          "pc": "0x802c0690",
+          "count": 2
+        },
+        {
+          "pc": "0x802c0694",
+          "count": 7
+        },
+        {
+          "pc": "0x802c0698",
+          "count": 2
+        },
+        {
+          "pc": "0x802c069c",
+          "count": 3
+        }
+      ],
+      "selected": {
+        "pc": "0x802c067c",
+        "count": 7
+      },
+      "applied_responses": {
+        "PC1": "100-OK",
+        "PC2": "100-OK",
+        "PC3": "100-OK"
+      }
+    }
+  },
+  "phases": [
+    {
+      "name": "同网ARP与ICMP",
+      "started_epoch": 1791884318.736234,
+      "commands": [
+        {
+          "device": "PC1",
+          "command": "clear arp-cache",
+          "output": "\r\n00:00:31: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:33: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:34: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upclear arp-cache\r\nPC1#"
+        },
+        {
+          "device": "PC2",
+          "command": "clear arp-cache",
+          "output": "\r\n00:00:42: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:44: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:45: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upclear arp-cache\r\nPC2#"
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "contains": [
+            "10.5.1.3"
+          ],
+          "output": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                0   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#",
+          "pass": true
+        }
+      ],
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.5.1.3",
+          "success": true,
+          "rounds": 2,
+          "round": 1,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 32/34/36 ms\r\nPC1#",
+          "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n.!!!!\r\nSuccess rate is 80 percent (4/5), round-trip min/avg/max = 16/31/36 ms\r\nPC1#",
+          "pass": true
+        },
+        {
+          "source": "PC1",
+          "target": "10.5.1.3",
+          "success": true,
+          "rounds": 2,
+          "round": 2,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 16/31/44 ms\r\nPC1#",
+          "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n.!!!!\r\nSuccess rate is 80 percent (4/5), round-trip min/avg/max = 16/31/36 ms\r\nPC1#",
+          "pass": true
+        }
+      ],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "\r\n*Mar  1 00:00:43.271: %SYS-5-CONFIG_I: Configured from console by console\r\n*Mar  1 00:00:44.747: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n*Mar  1 00:00:45.131: %LINK-3-UPDOWN: Interface FastEthernet1/0, changed state to up\r\n*Mar  1 00:00:45.755: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up\r\n*Mar  1 00:00:46.143: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet1/0, changed state to upshow ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                0   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "\r\n00:00:42: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:44: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:45: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upshow ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884340.3093429
+    },
+    {
+      "name": "跨网ARP与ICMP",
+      "started_epoch": 1791884340.309369,
+      "commands": [
+        {
+          "device": "PC1",
+          "command": "clear arp-cache",
+          "output": "clear arp-cache\r\nPC1#"
+        },
+        {
+          "device": "PC3",
+          "command": "clear arp-cache",
+          "output": "clear arp-cache\r\nPC3#"
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "contains": [
+            "10.5.1.1"
+          ],
+          "output": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                0   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                0   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#",
+          "pass": true
+        }
+      ],
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.5.2.2",
+          "success": true,
+          "rounds": 2,
+          "round": 1,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/73/104 ms\r\nPC1#",
+          "warmup_output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 60/73/92 ms\r\nPC1#",
+          "pass": true
+        },
+        {
+          "source": "PC1",
+          "target": "10.5.2.2",
+          "success": true,
+          "rounds": 2,
+          "round": 2,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/104 ms\r\nPC1#",
+          "warmup_output": "ping 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 60/73/92 ms\r\nPC1#",
+          "pass": true
+        },
+        {
+          "source": "PC3",
+          "target": "10.5.1.2",
+          "success": true,
+          "rounds": 2,
+          "round": 1,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/104 ms\r\nPC3#",
+          "warmup_output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/108 ms\r\nPC3#",
+          "pass": true
+        },
+        {
+          "source": "PC3",
+          "target": "10.5.1.2",
+          "success": true,
+          "rounds": 2,
+          "round": 2,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 40/68/108 ms\r\nPC3#",
+          "warmup_output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 56/80/108 ms\r\nPC3#",
+          "pass": true
+        }
+      ],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                0   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                0   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                0   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                0   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884366.6392
+    },
+    {
+      "name": "TTL耗尽真实ICMP11",
+      "started_epoch": 1791884366.639267,
+      "commands": [
+        {
+          "device": "PC1",
+          "command": {
+            "command": "traceroute 10.5.2.2",
+            "interrupt_after": 5
+          },
+          "output": "traceroute 10.5.2.2\r\n\r\nType escape sequence to abort.\r\nTracing the route to 10.5.2.2\r\n\r\n  1 \r\nPC1#"
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show ip route",
+          "contains": [
+            "10.5.1.1"
+          ],
+          "output": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "pass": true
+        }
+      ],
+      "pings": [],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                0   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                0   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                0   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                0   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884392.105823
+    },
+    {
+      "name": "不可达真实ICMP3",
+      "started_epoch": 1791884392.10588,
+      "commands": [],
+      "checks": [],
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.99.99.99",
+          "success": false,
+          "rounds": 1,
+          "round": 1,
+          "expected": [
+            0,
+            0,
+            5
+          ],
+          "observed": [
+            0,
+            0,
+            5
+          ],
+          "output": "ping 10.99.99.99\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.99.99.99, timeout is 2 seconds:\r\n.U.U.\r\nSuccess rate is 0 percent (0/5)\r\nPC1#",
+          "warmup_output": "ping 10.99.99.99\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.99.99.99, timeout is 2 seconds:\r\nU.U.U\r\nSuccess rate is 0 percent (0/5)\r\nPC1#",
+          "pass": true
+        }
+      ],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                1   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                1   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                1   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                1   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                1   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                1   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884420.8799748
+    },
+    {
+      "name": "静态ARP缓存",
+      "started_epoch": 1791884420.8799949,
+      "commands": [
+        {
+          "device": "PC1",
+          "command": "configure terminal",
+          "output": "configure terminal\r\nEnter configuration commands, one per line.  End with CNTL/Z.\r\nPC1(config)#"
+        },
+        {
+          "device": "PC1",
+          "command": "arp 10.5.1.250 0200.0501.0250 arpa",
+          "output": "arp 10.5.1.250 0200.0501.0250 arpa\r\nPC1(config)#"
+        },
+        {
+          "device": "PC1",
+          "command": "end",
+          "output": "end\r\nPC1#"
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "contains": [
+            "10.5.1.250",
+            "0200.0501.0250"
+          ],
+          "output": "\r\n00:02:57: %SYS-5-CONFIG_I: Configured from console by consoleshow arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                1   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                1   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.250              -   0200.0501.0250  ARPA  \r\nPC1#",
+          "pass": true
+        }
+      ],
+      "pings": [],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                1   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                1   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\narp 10.5.1.250 0200.0501.0250 ARPA\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                1   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                1   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.250              -   0200.0501.0250  ARPA  \r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                1   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                1   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884440.576069
+    },
+    {
+      "name": "清除静态ARP",
+      "started_epoch": 1791884440.576088,
+      "commands": [
+        {
+          "device": "PC1",
+          "command": "configure terminal",
+          "output": "configure terminal\r\nEnter configuration commands, one per line.  End with CNTL/Z.\r\nPC1(config)#"
+        },
+        {
+          "device": "PC1",
+          "command": "no arp 10.5.1.250 0200.0501.0250 arpa",
+          "output": "no arp 10.5.1.250 0200.0501.0250 arpa\r\nPC1(config)#"
+        },
+        {
+          "device": "PC1",
+          "command": "end",
+          "output": "end\r\nPC1#"
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "not_regex": "10\\.5\\.1\\.250",
+          "output": "\r\n00:03:16: %SYS-5-CONFIG_I: Configured from console by consoleshow arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                1   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                1   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#",
+          "pass": true
+        }
+      ],
+      "pings": [],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                1   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                1   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                1   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                1   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                1   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                1   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884460.205428
+    },
+    {
+      "name": "隔离网内重复IP",
+      "started_epoch": 1791884460.205455,
+      "commands": [
+        {
+          "device": "PC2",
+          "command": "configure terminal",
+          "output": "configure terminal\r\nEnter configuration commands, one per line.  End with CNTL/Z.\r\nPC2(config)#"
+        },
+        {
+          "device": "PC2",
+          "command": "interface FastEthernet0/0",
+          "output": "interface FastEthernet0/0\r\nPC2(config-if)#"
+        },
+        {
+          "device": "PC2",
+          "command": "ip address 10.5.1.2 255.255.255.0",
+          "output": "ip address 10.5.1.2 255.255.255.0\r\nPC2(config-if)#"
+        },
+        {
+          "device": "PC2",
+          "command": "end",
+          "output": "end\r\nPC2#"
+        },
+        {
+          "device": "R1",
+          "command": "clear arp-cache",
+          "output": "clear arp-cache\r\nR1#"
+        },
+        {
+          "device": "R1",
+          "command": "ping 10.5.1.2",
+          "output": "ping 10.5.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 32/39/68 ms\r\nR1#"
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC2",
+          "command": "show ip interface brief",
+          "contains": [
+            "10.5.1.2"
+          ],
+          "output": "\r\n00:03:47: %IP-4-DUPADDR: Duplicate address 10.5.1.2 on FastEthernet0/0, sourced by c803.1e2b.0000\r\n00:03:47: %SYS-5-CONFIG_I: Configured from console by consoleshow ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "pass": true
+        }
+      ],
+      "pings": [],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                0   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "\r\n00:03:36: %IP-4-DUPADDR: Duplicate address 10.5.1.2 on FastEthernet0/0, sourced by c804.1e2b.0000show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                2   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                0   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                0   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884483.069311
+    },
+    {
+      "name": "恢复唯一地址",
+      "started_epoch": 1791884483.0693629,
+      "commands": [
+        {
+          "device": "PC2",
+          "command": "configure terminal",
+          "output": "configure terminal\r\nEnter configuration commands, one per line.  End with CNTL/Z.\r\nPC2(config)#"
+        },
+        {
+          "device": "PC2",
+          "command": "interface FastEthernet0/0",
+          "output": "interface FastEthernet0/0\r\nPC2(config-if)#"
+        },
+        {
+          "device": "PC2",
+          "command": "ip address 10.5.1.3 255.255.255.0",
+          "output": "ip address 10.5.1.3 255.255.255.0\r\nPC2(config-if)#"
+        },
+        {
+          "device": "PC2",
+          "command": "end",
+          "output": "end\r\nPC2#"
+        },
+        {
+          "device": "PC1",
+          "command": "clear arp-cache",
+          "output": "clear arp-cache\r\nPC1#"
+        }
+      ],
+      "checks": [],
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.5.1.3",
+          "success": true,
+          "rounds": 2,
+          "round": 1,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 28/36/44 ms\r\nPC1#",
+          "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 20/36/52 ms\r\nPC1#",
+          "pass": true
+        },
+        {
+          "source": "PC1",
+          "target": "10.5.1.3",
+          "success": true,
+          "rounds": 2,
+          "round": 2,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 32/37/48 ms\r\nPC1#",
+          "warmup_output": "ping 10.5.1.3\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.5.1.3, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 20/36/52 ms\r\nPC1#",
+          "pass": true
+        }
+      ],
+      "snapshots": {
+        "R1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.1        YES manual up                    up      \r\nFastEthernet1/0            10.5.2.1        YES manual up                    up      \r\nR1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 550 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet1/0\r\n ip address 10.5.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\nip http server\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/24 is subnetted, 2 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet1/0\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nR1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.2.1                -   cc02.1e2b.0010  ARPA   FastEthernet1/0\r\nInternet  10.5.2.2                0   c805.1e2b.0000  ARPA   FastEthernet1/0\r\nInternet  10.5.1.1                -   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nR1#"
+        },
+        "PC1": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC1#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                -   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                0   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.1                0   cc02.1e2b.0000  ARPA   FastEthernet0/0\r\nPC1#"
+        },
+        "PC2": {
+          "show ip interface brief": "\r\n00:04:10: %SYS-5-CONFIG_I: Configured from console by consoleshow ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.1.3        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.1.3 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.1.1\r\nPC2#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.1.2                0   c803.1e2b.0000  ARPA   FastEthernet0/0\r\nInternet  10.5.1.3                -   c804.1e2b.0000  ARPA   FastEthernet0/0\r\nPC2#"
+        },
+        "PC3": {
+          "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.5.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC3#",
+          "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC3\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.5.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.5.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC3#",
+          "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.5.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.5.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.5.2.1\r\nPC3#",
+          "show arp": "show arp\r\nProtocol  Address          Age (min)  Hardware Addr   Type   Interface\r\nInternet  10.5.2.1                0   cc02.1e2b.0010  ARPA   FastEthernet0/0\r\nInternet  10.5.2.2                -   c805.1e2b.0000  ARPA   FastEthernet0/0\r\nPC3#"
+        }
+      },
+      "finished_epoch": 1791884503.533412
+    }
+  ],
+  "packet_checks": [
+    {
+      "name": "arp-request",
+      "filter": "arp.opcode == 1",
+      "min_packets": 1,
+      "capture": "client-lan",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 6,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "name": "arp-reply",
+      "filter": "arp.opcode == 2",
+      "min_packets": 1,
+      "capture": "client-lan",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 14,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "name": "echo-request",
+      "filter": "icmp.type == 8",
+      "min_packets": 1,
+      "capture": "client-lan",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 78,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "name": "echo-reply",
+      "filter": "icmp.type == 0",
+      "min_packets": 1,
+      "capture": "client-lan",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 62,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "name": "time-exceeded",
+      "filter": "icmp.type == 11",
+      "min_packets": 1,
+      "capture": "client-lan",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 1,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "name": "unreachable",
+      "filter": "icmp.type == 3",
+      "min_packets": 1,
+      "capture": "client-lan",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 5,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "name": "gratuitous-arp",
+      "filter": "arp.src.proto_ipv4 == arp.dst.proto_ipv4",
+      "min_packets": 1,
+      "capture": "client-lan",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 8,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "capture": "client-lan",
+      "filter": "(icmp.type == 11 && icmp.code == 0) && frame.time_epoch >= 1791884366.639267 && frame.time_epoch <= 1791884392.105823",
+      "min_packets": 1,
+      "phase": "TTL耗尽真实ICMP11",
+      "path": "./实验5/evidence/20261013-173710-388872/client-lan.pcap",
+      "packets": 1,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "hooks": [
+    {
+      "command": [
+        "./_环境/.venv/bin/python",
+        "./实验5/analyze_capture.py",
+        "--evidence",
+        "./实验5/evidence/20261013-173710-388872"
+      ],
+      "exit_code": 1,
+      "output": "{\n  \"status\": \"NOT READY\",\n  \"gates\": {\n    \"actual_packet_captures\": true,\n    \"arp_request\": true,\n    \"arp_reply\": true,\n    \"icmp_echo_request\": true,\n    \"icmp_echo_reply\": true,\n    \"icmp_time_exceeded\": true,\n    \"icmp_destination_unreachable\": false,\n    \"duplicate_ip_two_macs\": true,\n    \"gratuitous_arp\": true,\n    \"routed_packet_ttl_and_mac\": true\n  },\n  \"files\": [\n    \"./实验5/evidence/20261013-173710-388872/client-lan.pcap\",\n    \"./实验5/evidence/20261013-173710-388872/remote-lan.pcap\"\n  ],\n  \"duplicate_ip_macs\": [\n    \"c8:03:1e:2b:00:00\",\n    \"c8:04:1e:2b:00:00\"\n  ],\n  \"routed_packet_examples\": [\n    {\n      \"icmp_id_sequence\": [\n        \"9300\",\n        \"4444\"\n      ],\n      \"before\": {\n        \"frame.number\": \"101\",\n        \"frame.time_epoch\": \"1791884346.535964000\",\n        \"eth.src\": \"c8:03:1e:2b:00:00\",\n        \"eth.dst\": \"cc:02:1e:2b:00:00\",\n        \"arp.opcode\": \"\",\n        \"arp.src.proto_ipv4\": \"\",\n        \"arp.dst.proto_ipv4\": \"\",\n        \"arp.src.hw_mac\": \"\",\n        \"ip.src\": \"10.5.1.2\",\n        \"ip.dst\": \"10.5.2.2\",\n        \"ip.ttl\": \"255\",\n        \"icmp.type\": \"8\",\n        \"icmp.code\": \"0\",\n        \"icmp.ident\": \"9300\",\n        \"icmp.seq\": \"4444\",\n        \"capture\": \"client-lan.pcap\"\n      },\n      \"after\": {\n        \"frame.number\": \"21\",\n        \"frame.time_epoch\": \"1791884346.546541000\",\n        \"eth.src\": \"cc:02:1e:2b:00:10\",\n        \"eth.dst\": \"c8:05:1e:2b:00:00\",\n        \"arp.opcode\": \"\",\n        \"arp.src.proto_ipv4\": \"\",\n        \"arp.dst.proto_ipv4\": \"\",\n        \"arp.src.hw_mac\": \"\",\n        \"ip.src\": \"10.5.1.2\",\n        \"ip.dst\": \"10.5.2.2\",\n        \"ip.ttl\": \"254\",\n        \"icmp.type\": \"8\",\n        \"icmp.code\": \"0\",\n        \"icmp.ident\": \"9300\",\n        \"icmp.seq\": \"4444\",\n        \"capture\": \"remote-lan.pcap\"\n      }\n    },\n    {\n      \"icmp_id_sequence\": [\n        \"9301\",\n        \"4444\"\n      ],\n      \"before\": {\n        \"frame.number\": \"103\",\n        \"frame.time_epoch\": \"1791884346.630203000\",\n        \"eth.src\": \"c8:03:1e:2b:00:00\",\n        \"eth.dst\": \"cc:02:1e:2b:00:00\",\n        \"arp.opcode\": \"\",\n        \"arp.src.proto_ipv4\": \"\",\n        \"arp.dst.proto_ipv4\": \"\",\n        \"arp.src.hw_mac\": \"\",\n        \"ip.src\": \"10.5.1.2\",\n        \"ip.dst\": \"10.5.2.2\",\n        \"ip.ttl\": \"255\",\n        \"icmp.type\": \"8\",\n        \"icmp.code\": \"0\",\n        \"icmp.ident\": \"9301\",\n        \"icmp.seq\": \"4444\",\n        \"capture\": \"client-lan.pcap\"\n      },\n      \"after\": {\n        \"frame.number\": \"23\",\n        \"frame.time_epoch\": \"1791884346.641359000\",\n        \"eth.src\": \"cc:02:1e:2b:00:10\",\n        \"eth.dst\": \"c8:05:1e:2b:00:00\",\n        \"arp.opcode\": \"\",\n        \"arp.src.proto_ipv4\": \"\",\n        \"arp.dst.proto_ipv4\": \"\",\n        \"arp.src.hw_mac\": \"\",\n        \"ip.src\": \"10.5.1.2\",\n        \"ip.dst\": \"10.5.2.2\",\n        \"ip.ttl\": \"254\",\n        \"icmp.type\": \"8\",\n        \"icmp.code\": \"0\",\n        \"icmp.ident\": \"9301\",\n        \"icmp.seq\": \"4444\",\n        \"capture\": \"remote-lan.pcap\"\n      }\n    },\n    {\n      \"icmp_id_sequence\": [\n        \"9302\",\n        \"4444\"\n      ],\n      \"before\": {\n        \"frame.number\": \"105\",\n        \"frame.time_epoch\": \"1791884346.690482000\",\n        \"eth.src\": \"c8:03:1e:2b:00:00\",\n        \"eth.dst\": \"cc:02:1e:2b:00:00\",\n        \"arp.opcode\": \"\",\n        \"arp.src.proto_ipv4\": \"\",\n        \"arp.dst.proto_ipv4\": \"\",\n        \"arp.src.hw_mac\": \"\",\n        \"ip.src\": \"10.5.1.2\",\n        \"ip.dst\": \"10.5.2.2\",\n        \"ip.ttl\": \"255\",\n        \"icmp.type\": \"8\",\n        \"icmp.code\": \"0\",\n        \"icmp.ident\": \"9302\",\n        \"icmp.seq\": \"4444\",\n        \"capture\": \"client-lan.pcap\"\n      },\n      \"after\": {\n        \"frame.number\": \"25\",\n        \"frame.time_epoch\": \"1791884346.713813000\",\n        \"eth.src\": \"cc:02:1e:2b:00:10\",\n        \"eth.dst\": \"c8:05:1e:2b:00:00\",\n        \"arp.opcode\": \"\",\n        \"arp.src.proto_ipv4\": \"\",\n        \"arp.dst.proto_ipv4\": \"\",\n        \"arp.src.hw_mac\": \"\",\n        \"ip.src\": \"10.5.1.2\",\n        \"ip.dst\": \"10.5.2.2\",\n        \"ip.ttl\": \"254\",\n        \"icmp.type\": \"8\",\n        \"icmp.code\": \"0\",\n        \"icmp.ident\": \"9302\",\n        \"icmp.seq\": \"4444\",\n        \"capture\": \"remote-lan.pcap\"\n      }\n    }\n  ]\n}\n"
+    },
+    {
+      "command": [
+        "./_环境/.venv/bin/python",
+        "./实验5/http_proxy.py",
+        "--evidence",
+        "./实验5/evidence/20261013-173710-388872"
+      ],
+      "exit_code": 0,
+      "output": "{\n  \"status\": \"READY\",\n  \"gates\": {\n    \"real_http_through_proxy\": true,\n    \"absolute_target_to_origin_form\": true,\n    \"two_real_tcp_connections\": true,\n    \"request_response_order\": true\n  },\n  \"origin_port\": 60009,\n  \"proxy_port\": 60010,\n  \"capture_errors\": [\n    \"tcpdump exited with 1; see tcpdump.log\"\n  ],\n  \"optional_capture\": {\n    \"real_tcp_pcap\": false,\n    \"reason\": \"PPT第41页要求分析HTTP代理流程；TCPpcap为可选附加证据。真实ARP/ICMP抓包另由Dynamips完成。\"\n  },\n  \"functional_status\": \"READY\"\n}\n"
+    }
+  ],
+  "finished_at": "2026-10-13T17:42:04.870778+08:00"
+}

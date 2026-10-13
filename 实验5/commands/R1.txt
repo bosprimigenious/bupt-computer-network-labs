@@ -1,0 +1,13 @@
+enable
+configure terminal
+hostname R1
+no cdp run
+interface FastEthernet0/0
+ip address 10.5.1.1 255.255.255.0
+no shutdown
+exit
+interface FastEthernet1/0
+ip address 10.5.2.1 255.255.255.0
+no shutdown
+exit
+end

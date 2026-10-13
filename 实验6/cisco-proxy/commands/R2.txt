@@ -1,0 +1,17 @@
+enable
+configure terminal
+hostname R2
+interface f0/0
+ip address 205.161.255.2 255.255.255.0
+no shutdown
+exit
+interface f1/0
+ip address 205.161.2.254 255.255.255.0
+no shutdown
+exit
+router ospf 6
+router-id 0.0.0.2
+network 205.161.255.0 0.0.0.255 area 0
+network 205.161.2.0 0.0.0.255 area 0
+passive-interface f1/0
+end

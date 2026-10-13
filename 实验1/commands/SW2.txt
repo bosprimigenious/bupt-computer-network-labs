@@ -1,0 +1,19 @@
+enable
+configure terminal
+hostname SW2
+interface FastEthernet1/11
+switchport mode access
+switchport access vlan 1
+no shutdown
+exit
+interface FastEthernet1/1
+switchport mode access
+switchport access vlan 1
+no shutdown
+exit
+interface FastEthernet1/2
+switchport mode access
+switchport access vlan 1
+no shutdown
+exit
+end

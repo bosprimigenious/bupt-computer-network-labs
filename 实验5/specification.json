@@ -1,0 +1,296 @@
+{
+  "experiment": 5,
+  "expected_devices": 5,
+  "expected_links": 4,
+  "startup_wait": 40,
+  "snapshots": {
+    "R1": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route",
+      "show arp"
+    ],
+    "PC1": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route",
+      "show arp"
+    ],
+    "PC2": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route",
+      "show arp"
+    ],
+    "PC3": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route",
+      "show arp"
+    ]
+  },
+  "captures": [
+    {
+      "device": "PC1",
+      "interface": "f0/0",
+      "name": "client-lan"
+    },
+    {
+      "device": "PC3",
+      "interface": "f0/0",
+      "name": "remote-lan"
+    }
+  ],
+  "phases": [
+    {
+      "name": "同网ARP与ICMP",
+      "commands": {
+        "PC1": [
+          "clear arp-cache"
+        ],
+        "PC2": [
+          "clear arp-cache"
+        ]
+      },
+      "wait_seconds": 2,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.5.1.3",
+          "success": true,
+          "rounds": 2
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "contains": [
+            "10.5.1.3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "跨网ARP与ICMP",
+      "commands": {
+        "PC1": [
+          "clear arp-cache"
+        ],
+        "PC3": [
+          "clear arp-cache"
+        ]
+      },
+      "wait_seconds": 2,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.5.2.2",
+          "success": true,
+          "rounds": 2
+        },
+        {
+          "source": "PC3",
+          "target": "10.5.1.2",
+          "success": true,
+          "rounds": 2
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "contains": [
+            "10.5.1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TTL耗尽真实ICMP11",
+      "commands": {
+        "PC1": [
+          {
+            "command": "traceroute 10.5.2.2",
+            "interrupt_after": 5
+          }
+        ]
+      },
+      "wait_seconds": 2,
+      "pings": [],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show ip route",
+          "contains": [
+            "10.5.1.1"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "client-lan",
+          "filter": "icmp.type == 11 && icmp.code == 0",
+          "min_packets": 1
+        }
+      ]
+    },
+    {
+      "name": "不可达真实ICMP3",
+      "commands": {},
+      "wait_seconds": 2,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.99.99.99",
+          "success": false,
+          "rounds": 1
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "静态ARP缓存",
+      "commands": {
+        "PC1": [
+          "configure terminal",
+          "arp 10.5.1.250 0200.0501.0250 arpa",
+          "end"
+        ]
+      },
+      "wait_seconds": 2,
+      "pings": [],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "contains": [
+            "10.5.1.250",
+            "0200.0501.0250"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "清除静态ARP",
+      "commands": {
+        "PC1": [
+          "configure terminal",
+          "no arp 10.5.1.250 0200.0501.0250 arpa",
+          "end"
+        ]
+      },
+      "wait_seconds": 2,
+      "pings": [],
+      "checks": [
+        {
+          "device": "PC1",
+          "command": "show arp",
+          "not_regex": "10\\.5\\.1\\.250"
+        }
+      ]
+    },
+    {
+      "name": "隔离网内重复IP",
+      "commands": {
+        "PC2": [
+          "configure terminal",
+          "interface FastEthernet0/0",
+          "ip address 10.5.1.2 255.255.255.0",
+          "end"
+        ],
+        "R1": [
+          "clear arp-cache",
+          "ping 10.5.1.2"
+        ]
+      },
+      "wait_seconds": 5,
+      "pings": [],
+      "checks": [
+        {
+          "device": "PC2",
+          "command": "show ip interface brief",
+          "contains": [
+            "10.5.1.2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "恢复唯一地址",
+      "commands": {
+        "PC2": [
+          "configure terminal",
+          "interface FastEthernet0/0",
+          "ip address 10.5.1.3 255.255.255.0",
+          "end"
+        ],
+        "PC1": [
+          "clear arp-cache"
+        ]
+      },
+      "wait_seconds": 2,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.5.1.3",
+          "success": true,
+          "rounds": 2
+        }
+      ],
+      "checks": []
+    }
+  ],
+  "packet_checks": [
+    {
+      "name": "arp-request",
+      "filter": "arp.opcode == 1",
+      "min_packets": 1,
+      "capture": "client-lan"
+    },
+    {
+      "name": "arp-reply",
+      "filter": "arp.opcode == 2",
+      "min_packets": 1,
+      "capture": "client-lan"
+    },
+    {
+      "name": "echo-request",
+      "filter": "icmp.type == 8",
+      "min_packets": 1,
+      "capture": "client-lan"
+    },
+    {
+      "name": "echo-reply",
+      "filter": "icmp.type == 0",
+      "min_packets": 1,
+      "capture": "client-lan"
+    },
+    {
+      "name": "time-exceeded",
+      "filter": "icmp.type == 11",
+      "min_packets": 1,
+      "capture": "client-lan"
+    },
+    {
+      "name": "unreachable",
+      "filter": "icmp.type == 3",
+      "min_packets": 1,
+      "capture": "client-lan"
+    },
+    {
+      "name": "gratuitous-arp",
+      "filter": "arp.src.proto_ipv4 == arp.dst.proto_ipv4",
+      "min_packets": 1,
+      "capture": "client-lan"
+    }
+  ],
+  "hooks": [
+    {
+      "script": "analyze_capture.py"
+    },
+    {
+      "script": "http_proxy.py"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+enable
+vlan database
+vlan 20
+vlan 30
+vlan 40
+vlan 50
+vlan 60
+vlan 70
+vlan 80
+vlan 90
+vlan 999
+exit
+configure terminal
+hostname SW2
+no cdp run
+no ip routing
+interface f1/1
+switchport mode trunk
+switchport trunk native vlan 999
+switchport trunk allowed vlan 1,20,30,40,50,60,70,80,90,1002-1005
+no shutdown
+exit
+interface f1/2
+switchport mode trunk
+switchport trunk native vlan 999
+switchport trunk allowed vlan 1,20,30,40,50,60,70,80,90,1002-1005
+no shutdown
+exit
+interface f1/11
+switchport mode access
+switchport access vlan 40
+spanning-tree portfast
+no shutdown
+exit
+interface f1/12
+switchport mode access
+switchport access vlan 50
+spanning-tree portfast
+no shutdown
+exit
+end

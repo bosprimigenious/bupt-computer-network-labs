@@ -1,0 +1,10 @@
+enable
+configure terminal
+hostname PC3
+no cdp run
+no service dhcp
+ip route 0.0.0.0 0.0.0.0 205.161.2.254
+interface f0/0
+ip address 205.161.2.1 255.255.255.0
+no shutdown
+end

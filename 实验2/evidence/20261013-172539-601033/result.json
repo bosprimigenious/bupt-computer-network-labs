@@ -1,0 +1,539 @@
+{
+  "status": "READY",
+  "started_at": "2026-10-13T17:25:39.601190+08:00",
+  "topology": "./实验2/topology.net",
+  "gates": {
+    "expected_devices_and_links": true,
+    "ios_boot": true,
+    "idlepc_calibrated_and_applied": true,
+    "configuration": true,
+    "phase_PPP和静态路由": true,
+    "real_capture_files": true,
+    "packet_analysis": true
+  },
+  "devices": {
+    "R1": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3004,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.2.1.1        YES manual up                    up      \r\nSerial1/0                  unassigned      YES unset  administratively down down    \r\nSerial1/1                  10.2.12.1       YES manual up                    up      \r\nSerial1/2                  unassigned      YES unset  administratively down down    \r\nSerial1/3                  unassigned      YES unset  administratively down down    \r\nR1#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 839 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.2.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface Serial1/0\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\ninterface Serial1/1\r\n ip address 10.2.12.1 255.255.255.252\r\n encapsulation ppp\r\n serial restart-delay 0\r\n clock rate 115200\r\n!\r\ninterface Serial1/2\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\ninterface Serial1/3\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\nip http server\r\nip route 10.2.2.0 255.255.255.0 10.2.12.2\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/8 is variably subnetted, 4 subnets, 3 masks\r\nC       10.2.12.0/30 is directly connected, Serial1/1\r\nC       10.2.12.2/32 is directly connected, Serial1/1\r\nC       10.2.1.0/24 is directly connected, FastEthernet0/0\r\nS       10.2.2.0/24 [1/0] via 10.2.12.2\r\nR1#"
+      }
+    },
+    "R2": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3005,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.2.2.1        YES manual up                    up      \r\nSerial1/0                  10.2.12.2       YES manual up                    up      \r\nSerial1/1                  unassigned      YES unset  administratively down down    \r\nSerial1/2                  unassigned      YES unset  administratively down down    \r\nSerial1/3                  unassigned      YES unset  administratively down down    \r\nR2#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 820 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R2\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.2.2.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface Serial1/0\r\n ip address 10.2.12.2 255.255.255.252\r\n encapsulation ppp\r\n serial restart-delay 0\r\n!\r\ninterface Serial1/1\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\ninterface Serial1/2\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\ninterface Serial1/3\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\nip http server\r\nip route 10.2.1.0 255.255.255.0 10.2.12.1\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR2#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/8 is variably subnetted, 4 subnets, 3 masks\r\nC       10.2.12.0/30 is directly connected, Serial1/0\r\nC       10.2.12.1/32 is directly connected, Serial1/0\r\nS       10.2.1.0/24 [1/0] via 10.2.12.1\r\nC       10.2.2.0/24 is directly connected, FastEthernet0/0\r\nR2#"
+      }
+    },
+    "PC1": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3006,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.2.1.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC1#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC1\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.2.1.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.2.1.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC1#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.2.1.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.2.1.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.2.1.1\r\nPC1#"
+      }
+    },
+    "PC2": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3007,
+      "configuration_applied": true,
+      "snapshots": {
+        "show ip interface brief": "show ip interface brief\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nFastEthernet0/0            10.2.2.2        YES manual up                    up      \r\nFastEthernet0/1            unassigned      YES unset  administratively down down    \r\nPC2#",
+        "show running-config": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration:\r\n!\r\nversion 12.1\r\nservice timestamps debug uptime\r\nservice timestamps log uptime\r\nno service password-encryption\r\n!\r\nhostname PC2\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nmemory-size iomem 15\r\nip subnet-zero\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.2.2.2 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface FastEthernet0/1\r\n no ip address\r\n shutdown\r\n duplex auto\r\n speed auto\r\n!\r\nip classless\r\nip route 0.0.0.0 0.0.0.0 10.2.2.1\r\nno ip http server\r\n!\r\nno cdp run\r\n!\r\nline con 0\r\n transport input none\r\nline aux 0\r\nline vty 0 4\r\n!\r\nno scheduler allocate\r\nend\r\n\r\nPC2#",
+        "show ip route": "show ip route\r\nCodes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP\r\n       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area\r\n       * - candidate default, U - per-user static route, o - ODR\r\n       P - periodic downloaded static route\r\n\r\nGateway of last resort is 10.2.2.1 to network 0.0.0.0\r\n\r\n     10.0.0.0/24 is subnetted, 1 subnets\r\nC       10.2.2.0 is directly connected, FastEthernet0/0\r\nS*   0.0.0.0/0 [1/0] via 10.2.2.1\r\nPC2#"
+      }
+    }
+  },
+  "pings": [
+    {
+      "source": "PC1",
+      "target": "10.2.2.2",
+      "success": true,
+      "rounds": 3,
+      "round": 1,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/115/144 ms\r\nPC1#",
+      "warmup_output": "\r\n00:00:22: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:24: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:25: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 72/92/108 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.2.2.2",
+      "success": true,
+      "rounds": 3,
+      "round": 2,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/112/144 ms\r\nPC1#",
+      "warmup_output": "\r\n00:00:22: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:24: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:25: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 72/92/108 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC1",
+      "target": "10.2.2.2",
+      "success": true,
+      "rounds": 3,
+      "round": 3,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 132/146/164 ms\r\nPC1#",
+      "warmup_output": "\r\n00:00:22: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:24: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:25: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 72/92/108 ms\r\nPC1#",
+      "pass": true
+    },
+    {
+      "source": "PC2",
+      "target": "10.2.1.2",
+      "success": true,
+      "rounds": 3,
+      "round": 1,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 132/144/168 ms\r\nPC2#",
+      "warmup_output": "\r\n00:00:34: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:36: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:37: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/116/144 ms\r\nPC2#",
+      "pass": true
+    },
+    {
+      "source": "PC2",
+      "target": "10.2.1.2",
+      "success": true,
+      "rounds": 3,
+      "round": 2,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 100/123/140 ms\r\nPC2#",
+      "warmup_output": "\r\n00:00:34: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:36: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:37: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/116/144 ms\r\nPC2#",
+      "pass": true
+    },
+    {
+      "source": "PC2",
+      "target": "10.2.1.2",
+      "success": true,
+      "rounds": 3,
+      "round": 3,
+      "expected": [
+        100,
+        5,
+        5
+      ],
+      "observed": [
+        100,
+        5,
+        5
+      ],
+      "output": "ping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 100/124/164 ms\r\nPC2#",
+      "warmup_output": "\r\n00:00:34: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:36: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:37: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/116/144 ms\r\nPC2#",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "student_octet": 161,
+  "address_parameter_provisional": false,
+  "specification_sha256": "7bd2c16b3e921b3a94f6e49c508adfe4c17ef44d2ea171fa0f83a6a5f04f792d",
+  "sha256": {
+    "topology": "852b02ab738c6e6c597e211c3a2b007c02d5e4c19c00219c3d33c48a061be3e7",
+    "commands": {
+      "R1": "ecc44e1e29627ae02f6f5b526415103d00373ac437112df3b13c1af2a3d49dfa",
+      "R2": "226de4c40c445f11e96555ff3835f6c99196f1bf44a7ca93110bc431690d7d77",
+      "PC1": "9e69c73dba9e303225d4bda29ccf0553130222d98ec9c6238232d71d192147fe",
+      "PC2": "8dc56a099a03f1a875b4c9efae5bcc728ed98acec2c14cb0cbb3ba61bc94c70b"
+    },
+    "ios": {
+      "./_环境/ios/unzip-c3640-js-mz.124-10.bin": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
+      "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
+    }
+  },
+  "hypervisor_version": "100-0.2.25-nojit",
+  "links": [
+    [
+      [
+        "PC1",
+        "f0/0"
+      ],
+      [
+        "R1",
+        "f0/0"
+      ]
+    ],
+    [
+      [
+        "R1",
+        "s1/1"
+      ],
+      [
+        "R2",
+        "s1/0"
+      ]
+    ],
+    [
+      [
+        "PC2",
+        "f0/0"
+      ],
+      [
+        "R2",
+        "f0/0"
+      ]
+    ]
+  ],
+  "captures": [
+    {
+      "nio": "link1_0",
+      "path": "./实验2/evidence/20261013-172539-601033/ppp-link.pcap",
+      "name": "ppp-link"
+    }
+  ],
+  "idlepc": {
+    "./_环境/ios/unzip-c3640-js-mz.124-10.bin": {
+      "representative": "R1",
+      "devices": [
+        "R1",
+        "R2"
+      ],
+      "raw_output": "101 0x604f1484 [3]\n101 0x604f1488 [1]\n101 0x604f148c [1]\n101 0x604f1490 [2]\n101 0x604f1494 [4]\n101 0x604f1538 [1]\n101 0x604f153c [4]\n101 0x604f1540 [7]\n101 0x604b99e8 [12]\n101 0x604eaf94 [5]\n100-OK",
+      "candidates": [
+        {
+          "pc": "0x604f1484",
+          "count": 3
+        },
+        {
+          "pc": "0x604f1488",
+          "count": 1
+        },
+        {
+          "pc": "0x604f148c",
+          "count": 1
+        },
+        {
+          "pc": "0x604f1490",
+          "count": 2
+        },
+        {
+          "pc": "0x604f1494",
+          "count": 4
+        },
+        {
+          "pc": "0x604f1538",
+          "count": 1
+        },
+        {
+          "pc": "0x604f153c",
+          "count": 4
+        },
+        {
+          "pc": "0x604f1540",
+          "count": 7
+        },
+        {
+          "pc": "0x604b99e8",
+          "count": 12
+        },
+        {
+          "pc": "0x604eaf94",
+          "count": 5
+        }
+      ],
+      "selected": {
+        "pc": "0x604b99e8",
+        "count": 12
+      },
+      "applied_responses": {
+        "R1": "100-OK",
+        "R2": "100-OK"
+      }
+    },
+    "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": {
+      "representative": "PC1",
+      "devices": [
+        "PC1",
+        "PC2"
+      ],
+      "raw_output": "101 0x80348310 [1]\n101 0x80348320 [1]\n101 0x80348338 [1]\n101 0x803483c4 [1]\n101 0x802c067c [12]\n101 0x802c0680 [1]\n101 0x802c0684 [4]\n101 0x802c0688 [4]\n101 0x802c068c [4]\n101 0x802c0690 [6]\n100-OK",
+      "candidates": [
+        {
+          "pc": "0x80348310",
+          "count": 1
+        },
+        {
+          "pc": "0x80348320",
+          "count": 1
+        },
+        {
+          "pc": "0x80348338",
+          "count": 1
+        },
+        {
+          "pc": "0x803483c4",
+          "count": 1
+        },
+        {
+          "pc": "0x802c067c",
+          "count": 12
+        },
+        {
+          "pc": "0x802c0680",
+          "count": 1
+        },
+        {
+          "pc": "0x802c0684",
+          "count": 4
+        },
+        {
+          "pc": "0x802c0688",
+          "count": 4
+        },
+        {
+          "pc": "0x802c068c",
+          "count": 4
+        },
+        {
+          "pc": "0x802c0690",
+          "count": 6
+        }
+      ],
+      "selected": {
+        "pc": "0x802c067c",
+        "count": 12
+      },
+      "applied_responses": {
+        "PC1": "100-OK",
+        "PC2": "100-OK"
+      }
+    }
+  },
+  "phases": [
+    {
+      "name": "PPP和静态路由",
+      "commands": [],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show interfaces Serial1/1",
+          "contains": [
+            "Serial1/1 is up, line protocol is up",
+            "Encapsulation PPP",
+            "LCP Open"
+          ],
+          "output": "\r\n*Mar  1 00:00:24.347: %SYS-5-CONFIG_I: Configured from console by console\r\n*Mar  1 00:00:25.295: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n*Mar  1 00:00:25.887: %LINK-3-UPDOWN: Interface Serial1/1, changed state to up\r\n*Mar  1 00:00:26.299: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up\r\n*Mar  1 00:00:26.983: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial1/1, changed state to upshow interfaces Serial1/1\r\nSerial1/1 is up, line protocol is up \r\n  Hardware is M4T\r\n  Internet address is 10.2.12.1/30\r\n  MTU 1500 bytes, BW 1544 Kbit, DLY 20000 usec, \r\n     reliability 255/255, txload 1/255, rxload 1/255\r\n  Encapsulation PPP, LCP Open\r\n  Open: IPCP, crc 16, loopback not set\r\n  Keepalive set (10 sec)\r\n  Restart-Delay is 0 secs\r\n  Last input 00:00:28, output 00:00:07, output hang never\r\n  Last clearing of \"show interface\" counters 00:00:30\r\n  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0\r\n  Queueing strategy: weighted fair\r\n  Output queue: 0/1000/64/0 (size/max total/threshold/drops) \r\n     Conversations  0/1/256 (active/max active/max total)\r\n     Reserved Conversations 0/0 (allocated/max allocated)\r\n     Available Bandwidth 1158 kilobits/sec\r\n  5 minute input rate 0 bits/sec, 0 packets/sec\r\n  5 minute output rate 0 bits/sec, 0 packets/sec\r\n     10 packets input, 152 bytes, 0 no buffer\r\n     Received 0 broadcasts, 0 runts, 0 giants, 0 throttles\r\n     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort\r\n     10 packets output, 152 bytes, 0 underruns\r\n     0 output errors, 0 collisions, 2 interface resets\r\n     0 output buffer failures, 0 output buffers swapped out\r\n     1 carrier transitions     DCD=up  DSR=up  DTR=up  RTS=up  CTS=up\r\n\r\nR1#",
+          "pass": true
+        },
+        {
+          "device": "R2",
+          "command": "show interfaces Serial1/0",
+          "contains": [
+            "Serial1/0 is up, line protocol is up",
+            "Encapsulation PPP",
+            "LCP Open"
+          ],
+          "output": "\r\n*Mar  1 00:00:35.639: %SYS-5-CONFIG_I: Configured from console by console\r\n*Mar  1 00:00:36.699: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n*Mar  1 00:00:37.303: %LINK-3-UPDOWN: Interface Serial1/0, changed state to up\r\n*Mar  1 00:00:37.727: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up\r\n*Mar  1 00:00:38.383: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial1/0, changed state to upshow interfaces Serial1/0\r\nSerial1/0 is up, line protocol is up \r\n  Hardware is M4T\r\n  Internet address is 10.2.12.2/30\r\n  MTU 1500 bytes, BW 1544 Kbit, DLY 20000 usec, \r\n     reliability 255/255, txload 1/255, rxload 1/255\r\n  Encapsulation PPP, LCP Open\r\n  Open: IPCP, crc 16, loopback not set\r\n  Keepalive set (10 sec)\r\n  Restart-Delay is 0 secs\r\n  Last input 00:00:31, output 00:00:09, output hang never\r\n  Last clearing of \"show interface\" counters 00:00:33\r\n  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0\r\n  Queueing strategy: weighted fair\r\n  Output queue: 0/1000/64/0 (size/max total/threshold/drops) \r\n     Conversations  0/1/256 (active/max active/max total)\r\n     Reserved Conversations 0/0 (allocated/max allocated)\r\n     Available Bandwidth 1158 kilobits/sec\r\n  5 minute input rate 0 bits/sec, 0 packets/sec\r\n  5 minute output rate 0 bits/sec, 0 packets/sec\r\n     10 packets input, 152 bytes, 0 no buffer\r\n     Received 0 broadcasts, 0 runts, 0 giants, 0 throttles\r\n     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort\r\n     12 packets output, 184 bytes, 0 underruns\r\n     0 output errors, 0 collisions, 1 interface resets\r\n     0 output buffer failures, 0 output buffers swapped out\r\n     1 carrier transitions     DCD=up  DSR=up  DTR=up  RTS=up  CTS=up\r\n\r\nR2#",
+          "pass": true
+        },
+        {
+          "device": "R1",
+          "command": "show running-config",
+          "contains": [
+            "clock rate 115200",
+            "ip route 10.2.2.0 255.255.255.0 10.2.12.2"
+          ],
+          "output": "show running-config\r\nBuilding configuration...\r\n\r\nCurrent configuration : 839 bytes\r\n!\r\nversion 12.4\r\nservice timestamps debug datetime msec\r\nservice timestamps log datetime msec\r\nno service password-encryption\r\n!\r\nhostname R1\r\n!\r\nboot-start-marker\r\nboot-end-marker\r\n!\r\n!\r\nno aaa new-model\r\nmemory-size iomem 5\r\n!\r\n!\r\nip cef\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\ninterface FastEthernet0/0\r\n ip address 10.2.1.1 255.255.255.0\r\n duplex auto\r\n speed auto\r\n!\r\ninterface Serial1/0\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\ninterface Serial1/1\r\n ip address 10.2.12.1 255.255.255.252\r\n encapsulation ppp\r\n serial restart-delay 0\r\n clock rate 115200\r\n!\r\ninterface Serial1/2\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\ninterface Serial1/3\r\n no ip address\r\n shutdown\r\n serial restart-delay 0\r\n!\r\nip http server\r\nip route 10.2.2.0 255.255.255.0 10.2.12.2\r\n!\r\n!\r\n!\r\nno cdp run\r\n!\r\n!\r\n!\r\ncontrol-plane\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\n!\r\nline con 0\r\nline aux 0\r\nline vty 0 4\r\n!\r\n!\r\nend\r\n\r\nR1#",
+          "pass": true
+        },
+        {
+          "device": "R2",
+          "command": "show ip route",
+          "regex": "S\\s+10\\.2\\.1\\.0(?:/24)?\\s+\\[1/0\\] via 10\\.2\\.12\\.1",
+          "output": "show ip route\r\nCodes: C - connected, S - static, R - RIP, M - mobile, B - BGP\r\n       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area \r\n       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\r\n       E1 - OSPF external type 1, E2 - OSPF external type 2\r\n       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\r\n       ia - IS-IS inter area, * - candidate default, U - per-user static route\r\n       o - ODR, P - periodic downloaded static route\r\n\r\nGateway of last resort is not set\r\n\r\n     10.0.0.0/8 is variably subnetted, 4 subnets, 3 masks\r\nC       10.2.12.0/30 is directly connected, Serial1/0\r\nC       10.2.12.1/32 is directly connected, Serial1/0\r\nS       10.2.1.0/24 [1/0] via 10.2.12.1\r\nC       10.2.2.0/24 is directly connected, FastEthernet0/0\r\nR2#",
+          "pass": true
+        }
+      ],
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.2.2.2",
+          "success": true,
+          "rounds": 3,
+          "round": 1,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/115/144 ms\r\nPC1#",
+          "warmup_output": "\r\n00:00:22: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:24: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:25: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 72/92/108 ms\r\nPC1#",
+          "pass": true
+        },
+        {
+          "source": "PC1",
+          "target": "10.2.2.2",
+          "success": true,
+          "rounds": 3,
+          "round": 2,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/112/144 ms\r\nPC1#",
+          "warmup_output": "\r\n00:00:22: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:24: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:25: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 72/92/108 ms\r\nPC1#",
+          "pass": true
+        },
+        {
+          "source": "PC1",
+          "target": "10.2.2.2",
+          "success": true,
+          "rounds": 3,
+          "round": 3,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 132/146/164 ms\r\nPC1#",
+          "warmup_output": "\r\n00:00:22: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:24: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:25: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.2.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.2.2, timeout is 2 seconds:\r\n..!!!\r\nSuccess rate is 60 percent (3/5), round-trip min/avg/max = 72/92/108 ms\r\nPC1#",
+          "pass": true
+        },
+        {
+          "source": "PC2",
+          "target": "10.2.1.2",
+          "success": true,
+          "rounds": 3,
+          "round": 1,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 132/144/168 ms\r\nPC2#",
+          "warmup_output": "\r\n00:00:34: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:36: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:37: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/116/144 ms\r\nPC2#",
+          "pass": true
+        },
+        {
+          "source": "PC2",
+          "target": "10.2.1.2",
+          "success": true,
+          "rounds": 3,
+          "round": 2,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 100/123/140 ms\r\nPC2#",
+          "warmup_output": "\r\n00:00:34: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:36: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:37: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/116/144 ms\r\nPC2#",
+          "pass": true
+        },
+        {
+          "source": "PC2",
+          "target": "10.2.1.2",
+          "success": true,
+          "rounds": 3,
+          "round": 3,
+          "expected": [
+            100,
+            5,
+            5
+          ],
+          "observed": [
+            100,
+            5,
+            5
+          ],
+          "output": "ping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 100/124/164 ms\r\nPC2#",
+          "warmup_output": "\r\n00:00:34: %SYS-5-CONFIG_I: Configured from console by console\r\n00:00:36: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\r\n00:00:37: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to upping 10.2.1.2\r\n\r\nType escape sequence to abort.\r\nSending 5, 100-byte ICMP Echos to 10.2.1.2, timeout is 2 seconds:\r\n!!!!!\r\nSuccess rate is 100 percent (5/5), round-trip min/avg/max = 96/116/144 ms\r\nPC2#",
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "packet_checks": [
+    {
+      "capture": "ppp-link",
+      "filter": "ppp && icmp",
+      "min_packets": 10,
+      "path": "./实验2/evidence/20261013-172539-601033/ppp-link.pcap",
+      "packets": 77,
+      "pass": true,
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "finished_at": "2026-10-13T17:27:33.165369+08:00"
+}

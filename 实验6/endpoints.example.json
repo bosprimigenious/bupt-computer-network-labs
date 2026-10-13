@@ -1,0 +1,14 @@
+{
+  "R1": {"host": null, "port": 101},
+  "R2": {"host": null, "port": 102},
+  "R3": {"host": null, "port": 103},
+  "R4": {"host": null, "port": 104},
+  "PC1": {"host": null, "port": 5001, "kind": "vpcs"},
+  "PC2": {"host": null, "port": 5002, "kind": "vpcs"},
+  "PC3": {"host": null, "port": 5003, "kind": "vpcs"},
+  "PC4": {"host": null, "port": 5004, "kind": "vpcs"},
+  "PC5": {"host": null, "port": 5005, "kind": "vpcs"},
+  "PC6": {"host": null, "port": 5006, "kind": "vpcs"},
+  "PC7": {"host": null, "port": 5007, "kind": "vpcs"},
+  "PC8": {"host": null, "port": 5008, "kind": "vpcs"}
+}

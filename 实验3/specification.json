@@ -1,0 +1,943 @@
+{
+  "startup_wait": 10,
+  "snapshots": {
+    "R1": [
+      "show ip interface brief",
+      "show ip route",
+      "show ip protocols",
+      "show ip arp"
+    ],
+    "R2": [
+      "show ip interface brief",
+      "show ip route",
+      "show ip protocols",
+      "show ip arp"
+    ],
+    "R3": [
+      "show ip interface brief",
+      "show ip route",
+      "show ip protocols",
+      "show ip arp"
+    ],
+    "R4": [
+      "show ip interface brief",
+      "show ip route",
+      "show ip protocols",
+      "show ip arp"
+    ],
+    "PC1": [
+      "show ip interface brief",
+      "show ip route",
+      "show ip protocols",
+      "show ip arp"
+    ],
+    "PC2": [
+      "show ip interface brief",
+      "show ip route",
+      "show ip protocols",
+      "show ip arp"
+    ]
+  },
+  "captures": [
+    {
+      "device": "R1",
+      "interface": "f1/0",
+      "name": "R1-R2-protocols"
+    },
+    {
+      "device": "R1",
+      "interface": "f2/0",
+      "name": "R1-R3-failover"
+    },
+    {
+      "device": "R1",
+      "interface": "f0/0",
+      "name": "PC1-LAN"
+    }
+  ],
+  "phases": [
+    {
+      "name": "static-next-hop",
+      "commands": {},
+      "wait_seconds": 8,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip route",
+          "regex": "S\\s+205\\.161\\.4\\.0"
+        }
+      ],
+      "packet_checks": []
+    },
+    {
+      "name": "static-outgoing-interface",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "no ip route 205.161.4.0 255.255.255.0 205.161.12.2",
+          "ip route 205.161.4.0 255.255.255.0 FastEthernet1/0",
+          "end"
+        ],
+        "R4": [
+          "configure terminal",
+          "no ip route 205.161.1.0 255.255.255.0 205.161.24.1",
+          "ip route 205.161.1.0 255.255.255.0 FastEthernet1/0",
+          "end"
+        ],
+        "PC1": [
+          "configure terminal",
+          "no ip route 0.0.0.0 0.0.0.0 205.161.1.1",
+          "ip route 0.0.0.0 0.0.0.0 FastEthernet0/0",
+          "end"
+        ],
+        "PC2": [
+          "configure terminal",
+          "no ip route 0.0.0.0 0.0.0.0 205.161.4.1",
+          "ip route 0.0.0.0 0.0.0.0 FastEthernet0/0",
+          "end"
+        ]
+      },
+      "wait_seconds": 8,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip arp",
+          "contains": [
+            "205.161.4.2"
+          ]
+        },
+        {
+          "device": "PC1",
+          "command": "show ip arp",
+          "contains": [
+            "205.161.4.2"
+          ]
+        }
+      ],
+      "packet_checks": []
+    },
+    {
+      "name": "rip-default-split-horizon",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "line console 0",
+          "logging synchronous",
+          "exit",
+          "end",
+          "debug ip rip",
+          "configure terminal",
+          "no ip route 205.161.4.0 255.255.255.0 FastEthernet1/0",
+          "router rip",
+          "version 2",
+          "no auto-summary",
+          "network 205.161.1.0",
+          "network 205.161.12.0",
+          "network 205.161.13.0",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "no ip route 205.161.1.0 255.255.255.0 205.161.12.1",
+          "no ip route 205.161.4.0 255.255.255.0 205.161.24.2",
+          "router rip",
+          "version 2",
+          "no auto-summary",
+          "network 205.161.12.0",
+          "network 205.161.24.0",
+          "exit",
+          "end"
+        ],
+        "R3": [
+          "configure terminal",
+          "no ip route 205.161.1.0 255.255.255.0 205.161.13.1",
+          "no ip route 205.161.4.0 255.255.255.0 205.161.34.2",
+          "router rip",
+          "version 2",
+          "no auto-summary",
+          "network 205.161.13.0",
+          "network 205.161.34.0",
+          "exit",
+          "end"
+        ],
+        "R4": [
+          "configure terminal",
+          "no ip route 205.161.1.0 255.255.255.0 FastEthernet1/0",
+          "router rip",
+          "version 2",
+          "no auto-summary",
+          "network 205.161.4.0",
+          "network 205.161.24.0",
+          "network 205.161.34.0",
+          "exit",
+          "end"
+        ],
+        "PC1": [
+          "configure terminal",
+          "no ip route 0.0.0.0 0.0.0.0 FastEthernet0/0",
+          "ip route 0.0.0.0 0.0.0.0 205.161.1.1",
+          "end"
+        ],
+        "PC2": [
+          "configure terminal",
+          "no ip route 0.0.0.0 0.0.0.0 FastEthernet0/0",
+          "ip route 0.0.0.0 0.0.0.0 205.161.4.1",
+          "end"
+        ]
+      },
+      "wait_seconds": 35,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip route",
+          "regex": "R\\s+205\\.161\\.4\\.0"
+        },
+        {
+          "device": "R1",
+          "command": "show ip interface FastEthernet1/0",
+          "contains": [
+            "Split horizon is enabled"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "rip",
+          "min_packets": 1
+        }
+      ]
+    },
+    {
+      "name": "rip-split-horizon-link-failure",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface f1/0",
+          "shutdown",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "interface f0/0",
+          "shutdown",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 35,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip route 205.161.4.0",
+          "contains": [
+            "205.161.13.2"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R3-failover",
+          "filter": "icmp",
+          "min_packets": 10
+        }
+      ]
+    },
+    {
+      "name": "rip-split-horizon-link-restored",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface f1/0",
+          "no shutdown",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "interface f0/0",
+          "no shutdown",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 35,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [],
+      "packet_checks": [
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "rip",
+          "min_packets": 1
+        }
+      ]
+    },
+    {
+      "name": "rip-without-split-horizon",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface f1/0",
+          "no ip split-horizon",
+          "exit",
+          "interface f2/0",
+          "no ip split-horizon",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "interface f0/0",
+          "no ip split-horizon",
+          "exit",
+          "interface f1/0",
+          "no ip split-horizon",
+          "exit",
+          "end"
+        ],
+        "R3": [
+          "configure terminal",
+          "interface f0/0",
+          "no ip split-horizon",
+          "exit",
+          "interface f1/0",
+          "no ip split-horizon",
+          "exit",
+          "end"
+        ],
+        "R4": [
+          "configure terminal",
+          "interface f1/0",
+          "no ip split-horizon",
+          "exit",
+          "interface f2/0",
+          "no ip split-horizon",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 35,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip interface FastEthernet1/0",
+          "contains": [
+            "Split horizon is disabled"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "rip",
+          "min_packets": 1
+        }
+      ]
+    },
+    {
+      "name": "rip-no-split-horizon-link-failure",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface f1/0",
+          "shutdown",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "interface f0/0",
+          "shutdown",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 35,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip route 205.161.4.0",
+          "contains": [
+            "205.161.13.2"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R3-failover",
+          "filter": "icmp",
+          "min_packets": 10
+        }
+      ]
+    },
+    {
+      "name": "rip-no-split-horizon-link-restored",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface f1/0",
+          "no shutdown",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "interface f0/0",
+          "no shutdown",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 35,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [],
+      "packet_checks": [
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "rip",
+          "min_packets": 1
+        }
+      ]
+    },
+    {
+      "name": "ospf-broadcast",
+      "commands": {
+        "R1": [
+          "undebug all",
+          "debug ip ospf adj",
+          "configure terminal",
+          "no router rip",
+          "router ospf 1",
+          "router-id 1.1.1.1",
+          "network 205.161.0.0 0.0.255.255 area 0",
+          "exit",
+          "interface f1/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "interface f2/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "no router rip",
+          "router ospf 1",
+          "router-id 2.2.2.2",
+          "network 205.161.0.0 0.0.255.255 area 0",
+          "exit",
+          "interface f0/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "interface f1/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "end"
+        ],
+        "R3": [
+          "configure terminal",
+          "no router rip",
+          "router ospf 1",
+          "router-id 3.3.3.3",
+          "network 205.161.0.0 0.0.255.255 area 0",
+          "exit",
+          "interface f0/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "interface f1/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "end"
+        ],
+        "R4": [
+          "configure terminal",
+          "no router rip",
+          "router ospf 1",
+          "router-id 4.4.4.4",
+          "network 205.161.0.0 0.0.255.255 area 0",
+          "exit",
+          "interface f1/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "interface f2/0",
+          "ip ospf hello-interval 5",
+          "ip ospf dead-interval 20",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 30,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip ospf interface FastEthernet1/0",
+          "contains": [
+            "BROADCAST"
+          ]
+        },
+        {
+          "device": "R1",
+          "command": "show ip ospf neighbor",
+          "contains": [
+            "FULL"
+          ]
+        },
+        {
+          "device": "R1",
+          "command": "show ip ospf database",
+          "contains": [
+            "Router Link States",
+            "1.1.1.1"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 1",
+          "min_packets": 1
+        },
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 2",
+          "min_packets": 1
+        },
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 4",
+          "min_packets": 1
+        },
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 5",
+          "min_packets": 1
+        }
+      ],
+      "convergence": [
+        {
+          "device": "R1",
+          "command": "show ip route 205.161.4.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        },
+        {
+          "device": "R4",
+          "command": "show ip route 205.161.1.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ospf-point-to-point",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface f1/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "interface f2/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "end"
+        ],
+        "R2": [
+          "configure terminal",
+          "interface f0/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "interface f1/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "end"
+        ],
+        "R3": [
+          "configure terminal",
+          "interface f0/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "interface f1/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "end"
+        ],
+        "R4": [
+          "configure terminal",
+          "interface f1/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "interface f2/0",
+          "ip ospf network point-to-point",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 25,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip ospf interface FastEthernet1/0",
+          "contains": [
+            "POINT_TO_POINT"
+          ]
+        },
+        {
+          "device": "R1",
+          "command": "show ip ospf database",
+          "contains": [
+            "Router Link States",
+            "1.1.1.1"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 1",
+          "min_packets": 1
+        },
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 2",
+          "min_packets": 1
+        },
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 4",
+          "min_packets": 1
+        },
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 5",
+          "min_packets": 1
+        }
+      ],
+      "convergence": [
+        {
+          "device": "R1",
+          "command": "show ip route 205.161.4.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        },
+        {
+          "device": "R4",
+          "command": "show ip route 205.161.1.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ospf-link-failure",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface FastEthernet1/0",
+          "shutdown",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 25,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip route 205.161.4.0",
+          "contains": [
+            "205.161.13.2"
+          ]
+        },
+        {
+          "device": "R1",
+          "command": "show ip ospf database",
+          "contains": [
+            "Router Link States",
+            "1.1.1.1"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R3-failover",
+          "filter": "icmp",
+          "min_packets": 10
+        }
+      ],
+      "convergence": [
+        {
+          "device": "R1",
+          "command": "show ip route 205.161.4.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        },
+        {
+          "device": "R4",
+          "command": "show ip route 205.161.1.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ospf-link-restored",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface FastEthernet1/0",
+          "no shutdown",
+          "exit",
+          "end",
+          "undebug all"
+        ]
+      },
+      "wait_seconds": 25,
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.2",
+          "success": true
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip ospf neighbor",
+          "contains": [
+            "2.2.2.2",
+            "3.3.3.3",
+            "FULL"
+          ]
+        },
+        {
+          "device": "R1",
+          "command": "show ip ospf database",
+          "contains": [
+            "Router Link States",
+            "1.1.1.1"
+          ]
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "R1-R2-protocols",
+          "filter": "ospf.msg == 1",
+          "min_packets": 1
+        }
+      ],
+      "convergence": [
+        {
+          "device": "R1",
+          "command": "show ip route 205.161.4.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        },
+        {
+          "device": "R4",
+          "command": "show ip route 205.161.1.0",
+          "contains": [
+            "Known via \"ospf 1\""
+          ]
+        }
+      ]
+    }
+  ],
+  "experiment": 3,
+  "student_octet": 161,
+  "student_octet_is_placeholder": false,
+  "expected_devices": 6,
+  "expected_links": 6,
+  "student_id": "（已隐去；地址参数161）",
+  "packet_checks": [
+    {
+      "capture": "R1-R2-protocols",
+      "filter": "rip",
+      "min_packets": 4
+    },
+    {
+      "capture": "R1-R2-protocols",
+      "filter": "ospf.msg == 1",
+      "min_packets": 4
+    },
+    {
+      "capture": "R1-R2-protocols",
+      "filter": "ospf.msg == 2",
+      "min_packets": 1
+    },
+    {
+      "capture": "R1-R2-protocols",
+      "filter": "ospf.msg == 4",
+      "min_packets": 1
+    },
+    {
+      "capture": "PC1-LAN",
+      "filter": "arp",
+      "min_packets": 2
+    },
+    {
+      "capture": "PC1-LAN",
+      "filter": "icmp",
+      "min_packets": 10
+    },
+    {
+      "capture": "R1-R2-protocols",
+      "filter": "ospf.msg == 5",
+      "min_packets": 1
+    },
+    {
+      "capture": "R1-R2-protocols",
+      "filter": "ospf.msg == 3",
+      "min_packets": 1
+    }
+  ]
+}

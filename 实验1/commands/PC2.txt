@@ -1,0 +1,9 @@
+enable
+configure terminal
+hostname PC2
+no cdp run
+interface FastEthernet0/0
+ip address 1.1.1.2 255.0.0.0
+no shutdown
+exit
+end

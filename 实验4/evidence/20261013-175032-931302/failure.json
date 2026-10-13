@@ -1,0 +1,5 @@
+{
+  "status": "NOT READY",
+  "error": "OSError28磁盘满，结果写入未完成；原始日志保留",
+  "execution_log": "/tmp/codex-lab4-final-run.log"
+}

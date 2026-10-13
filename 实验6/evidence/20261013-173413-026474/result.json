@@ -1,0 +1,30 @@
+{
+  "status": "NOT READY",
+  "scope": "实验6真实Cisco/Juniper/H3C互联",
+  "gates": {
+    "generate": true,
+    "real_three_vendor": false
+  },
+  "steps": [
+    {
+      "name": "generate",
+      "command": [
+        "./_环境/.venv/bin/python",
+        "./实验6/generate.py"
+      ],
+      "exit_code": 0,
+      "log": "./实验6/evidence/20261013-173413-026474/generate.log"
+    },
+    {
+      "name": "real_three_vendor",
+      "command": [
+        "./_环境/.venv/bin/python",
+        "./实验6/verify_remote.py",
+        "--endpoints",
+        "./实验6/endpoints.example.json"
+      ],
+      "exit_code": 2,
+      "log": "./实验6/evidence/20261013-173413-026474/real_three_vendor.log"
+    }
+  ]
+}

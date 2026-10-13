@@ -1,0 +1,140 @@
+# Own topology. Student ID （已隐去；地址参数161）: 926 % 255 = 161.
+autostart = False
+
+[localhost]
+    port = 7204
+    udp = 14000
+    workingdir = ./working
+
+    [[router SW1]]
+        model = 3640
+        image = ../_环境/ios/unzip-c3640-js-mz.124-10.bin
+        ram = 128
+        confreg = 0x2142
+        mmap = False
+        console = 3400
+        exec_area = 64
+        slot1 = NM-16ESW
+        f1/1 = SW2 f1/1
+        f1/2 = R1 f1/0
+        f1/11 = PC20 f0/0
+        f1/12 = PC30 f0/0
+
+    [[router SW2]]
+        model = 3640
+        image = ../_环境/ios/unzip-c3640-js-mz.124-10.bin
+        ram = 128
+        confreg = 0x2142
+        mmap = False
+        console = 3401
+        exec_area = 64
+        slot1 = NM-16ESW
+        f1/2 = SW3 f1/1
+        f1/11 = PC40 f0/0
+        f1/12 = PC50 f0/0
+
+    [[router SW3]]
+        model = 3640
+        image = ../_环境/ios/unzip-c3640-js-mz.124-10.bin
+        ram = 128
+        confreg = 0x2142
+        mmap = False
+        console = 3402
+        exec_area = 64
+        slot1 = NM-16ESW
+        f1/2 = R2 f1/0
+        f1/3 = R2 f2/0
+        f1/4 = R2 f3/0
+        f1/11 = PC60 f0/0
+        f1/12 = PC70 f0/0
+        f1/13 = PC80 f0/0
+        f1/14 = PC90 f0/0
+
+    [[router R1]]
+        model = 3640
+        image = ../_环境/ios/unzip-c3640-js-mz.124-10.bin
+        ram = 128
+        confreg = 0x2142
+        mmap = False
+        console = 3403
+        exec_area = 64
+        slot0 = NM-1FE-TX
+        slot1 = NM-1FE-TX
+        f0/0 = R2 f0/0
+
+    [[router R2]]
+        model = 3640
+        image = ../_环境/ios/unzip-c3640-js-mz.124-10.bin
+        ram = 128
+        confreg = 0x2142
+        mmap = False
+        console = 3404
+        exec_area = 64
+        slot0 = NM-1FE-TX
+        slot1 = NM-1FE-TX
+        slot2 = NM-1FE-TX
+        slot3 = NM-1FE-TX
+
+    [[router PC20]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3405
+
+    [[router PC30]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3406
+
+    [[router PC40]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3407
+
+    [[router PC50]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3408
+
+    [[router PC60]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3409
+
+    [[router PC70]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3410
+
+    [[router PC80]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3411
+
+    [[router PC90]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        confreg = 0x2142
+        mmap = False
+        console = 3412

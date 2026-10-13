@@ -1,0 +1,14 @@
+{
+  "status": "NOT READY",
+  "gates": {
+    "real_http_through_proxy": true,
+    "absolute_target_to_origin_form": true,
+    "real_tcp_pcap": false
+  },
+  "origin_port": 55416,
+  "proxy_port": 55417,
+  "capture_errors": [
+    "tcpdump exited with 1; see tcpdump.log"
+  ],
+  "functional_status": "READY"
+}

@@ -1,0 +1,95 @@
+{
+  "experiment": 2,
+  "expected_devices": 4,
+  "expected_links": 3,
+  "startup_wait": 30,
+  "snapshots": {
+    "R1": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route"
+    ],
+    "R2": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route"
+    ],
+    "PC1": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route"
+    ],
+    "PC2": [
+      "show ip interface brief",
+      "show running-config",
+      "show ip route"
+    ]
+  },
+  "captures": [
+    {
+      "device": "R1",
+      "interface": "s1/1",
+      "name": "ppp-link",
+      "link_type": "ppp_serial"
+    }
+  ],
+  "phases": [
+    {
+      "name": "PPP和静态路由",
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "10.2.2.2",
+          "success": true,
+          "rounds": 3
+        },
+        {
+          "source": "PC2",
+          "target": "10.2.1.2",
+          "success": true,
+          "rounds": 3
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show interfaces Serial1/1",
+          "contains": [
+            "Serial1/1 is up, line protocol is up",
+            "Encapsulation PPP",
+            "LCP Open"
+          ]
+        },
+        {
+          "device": "R2",
+          "command": "show interfaces Serial1/0",
+          "contains": [
+            "Serial1/0 is up, line protocol is up",
+            "Encapsulation PPP",
+            "LCP Open"
+          ]
+        },
+        {
+          "device": "R1",
+          "command": "show running-config",
+          "contains": [
+            "clock rate 115200",
+            "ip route 10.2.2.0 255.255.255.0 10.2.12.2"
+          ]
+        },
+        {
+          "device": "R2",
+          "command": "show ip route",
+          "regex": "S\\s+10\\.2\\.1\\.0(?:/24)?\\s+\\[1/0\\] via 10\\.2\\.12\\.1"
+        }
+      ]
+    }
+  ],
+  "packet_checks": [
+    {
+      "capture": "ppp-link",
+      "filter": "ppp && icmp",
+      "min_packets": 10
+    }
+  ]
+}

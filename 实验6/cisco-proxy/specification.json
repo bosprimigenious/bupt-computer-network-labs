@@ -1,0 +1,446 @@
+{
+  "experiment": 6,
+  "scope": "Cisco-only functional proxy; real three-vendor experiment is NOT READY",
+  "student_id": "（已隐去；地址参数161）",
+  "student_octet": 161,
+  "expected_devices": 13,
+  "expected_links": 16,
+  "startup_wait": 70,
+  "snapshots": {
+    "R1": [
+      "show ip interface brief",
+      "show ip ospf neighbor",
+      "show ip route ospf"
+    ],
+    "R2": [
+      "show ip interface brief",
+      "show ip ospf neighbor",
+      "show ip route ospf"
+    ],
+    "R3": [
+      "show ip interface brief",
+      "show ip ospf neighbor",
+      "show ip route ospf"
+    ],
+    "R4": [
+      "show ip interface brief",
+      "show ip ospf neighbor",
+      "show ip route ospf"
+    ]
+  },
+  "captures": [
+    {
+      "device": "R1",
+      "interface": "f0/0",
+      "name": "OSPF-transit"
+    }
+  ],
+  "packet_checks": [
+    {
+      "capture": "OSPF-transit",
+      "filter": "ospf",
+      "min_packets": 4
+    },
+    {
+      "capture": "OSPF-transit",
+      "filter": "icmp",
+      "min_packets": 10
+    }
+  ],
+  "phases": [
+    {
+      "name": "four-router-ospf-eight-pc-mesh-proxy",
+      "commands": {},
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.2\\.0"
+        },
+        {
+          "device": "R1",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.3\\.0"
+        },
+        {
+          "device": "R1",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.4\\.0"
+        },
+        {
+          "device": "R1",
+          "command": "show ip ospf neighbor",
+          "contains": [
+            "FULL",
+            "0.0.0.2",
+            "0.0.0.3",
+            "0.0.0.4"
+          ]
+        },
+        {
+          "device": "R2",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.1\\.0"
+        },
+        {
+          "device": "R2",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.3\\.0"
+        },
+        {
+          "device": "R2",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.4\\.0"
+        },
+        {
+          "device": "R2",
+          "command": "show ip ospf neighbor",
+          "contains": [
+            "FULL",
+            "0.0.0.1",
+            "0.0.0.3",
+            "0.0.0.4"
+          ]
+        },
+        {
+          "device": "R3",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.1\\.0"
+        },
+        {
+          "device": "R3",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.2\\.0"
+        },
+        {
+          "device": "R3",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.4\\.0"
+        },
+        {
+          "device": "R3",
+          "command": "show ip ospf neighbor",
+          "contains": [
+            "FULL",
+            "0.0.0.1",
+            "0.0.0.2",
+            "0.0.0.4"
+          ]
+        },
+        {
+          "device": "R4",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.1\\.0"
+        },
+        {
+          "device": "R4",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.2\\.0"
+        },
+        {
+          "device": "R4",
+          "command": "show ip route ospf",
+          "regex": "O\\s+205\\.161\\.3\\.0"
+        },
+        {
+          "device": "R4",
+          "command": "show ip ospf neighbor",
+          "contains": [
+            "FULL",
+            "0.0.0.1",
+            "0.0.0.2",
+            "0.0.0.3"
+          ]
+        }
+      ],
+      "pings": [
+        {
+          "source": "PC1",
+          "target": "205.161.1.2",
+          "success": true
+        },
+        {
+          "source": "PC1",
+          "target": "205.161.2.1",
+          "success": true
+        },
+        {
+          "source": "PC1",
+          "target": "205.161.2.2",
+          "success": true
+        },
+        {
+          "source": "PC1",
+          "target": "205.161.3.1",
+          "success": true
+        },
+        {
+          "source": "PC1",
+          "target": "205.161.3.2",
+          "success": true
+        },
+        {
+          "source": "PC1",
+          "target": "205.161.4.1",
+          "success": true
+        },
+        {
+          "source": "PC1",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.1.1",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.2.1",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.2.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.3.1",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.3.2",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.4.1",
+          "success": true
+        },
+        {
+          "source": "PC2",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC3",
+          "target": "205.161.1.1",
+          "success": true
+        },
+        {
+          "source": "PC3",
+          "target": "205.161.1.2",
+          "success": true
+        },
+        {
+          "source": "PC3",
+          "target": "205.161.2.2",
+          "success": true
+        },
+        {
+          "source": "PC3",
+          "target": "205.161.3.1",
+          "success": true
+        },
+        {
+          "source": "PC3",
+          "target": "205.161.3.2",
+          "success": true
+        },
+        {
+          "source": "PC3",
+          "target": "205.161.4.1",
+          "success": true
+        },
+        {
+          "source": "PC3",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC4",
+          "target": "205.161.1.1",
+          "success": true
+        },
+        {
+          "source": "PC4",
+          "target": "205.161.1.2",
+          "success": true
+        },
+        {
+          "source": "PC4",
+          "target": "205.161.2.1",
+          "success": true
+        },
+        {
+          "source": "PC4",
+          "target": "205.161.3.1",
+          "success": true
+        },
+        {
+          "source": "PC4",
+          "target": "205.161.3.2",
+          "success": true
+        },
+        {
+          "source": "PC4",
+          "target": "205.161.4.1",
+          "success": true
+        },
+        {
+          "source": "PC4",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC5",
+          "target": "205.161.1.1",
+          "success": true
+        },
+        {
+          "source": "PC5",
+          "target": "205.161.1.2",
+          "success": true
+        },
+        {
+          "source": "PC5",
+          "target": "205.161.2.1",
+          "success": true
+        },
+        {
+          "source": "PC5",
+          "target": "205.161.2.2",
+          "success": true
+        },
+        {
+          "source": "PC5",
+          "target": "205.161.3.2",
+          "success": true
+        },
+        {
+          "source": "PC5",
+          "target": "205.161.4.1",
+          "success": true
+        },
+        {
+          "source": "PC5",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC6",
+          "target": "205.161.1.1",
+          "success": true
+        },
+        {
+          "source": "PC6",
+          "target": "205.161.1.2",
+          "success": true
+        },
+        {
+          "source": "PC6",
+          "target": "205.161.2.1",
+          "success": true
+        },
+        {
+          "source": "PC6",
+          "target": "205.161.2.2",
+          "success": true
+        },
+        {
+          "source": "PC6",
+          "target": "205.161.3.1",
+          "success": true
+        },
+        {
+          "source": "PC6",
+          "target": "205.161.4.1",
+          "success": true
+        },
+        {
+          "source": "PC6",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC7",
+          "target": "205.161.1.1",
+          "success": true
+        },
+        {
+          "source": "PC7",
+          "target": "205.161.1.2",
+          "success": true
+        },
+        {
+          "source": "PC7",
+          "target": "205.161.2.1",
+          "success": true
+        },
+        {
+          "source": "PC7",
+          "target": "205.161.2.2",
+          "success": true
+        },
+        {
+          "source": "PC7",
+          "target": "205.161.3.1",
+          "success": true
+        },
+        {
+          "source": "PC7",
+          "target": "205.161.3.2",
+          "success": true
+        },
+        {
+          "source": "PC7",
+          "target": "205.161.4.2",
+          "success": true
+        },
+        {
+          "source": "PC8",
+          "target": "205.161.1.1",
+          "success": true
+        },
+        {
+          "source": "PC8",
+          "target": "205.161.1.2",
+          "success": true
+        },
+        {
+          "source": "PC8",
+          "target": "205.161.2.1",
+          "success": true
+        },
+        {
+          "source": "PC8",
+          "target": "205.161.2.2",
+          "success": true
+        },
+        {
+          "source": "PC8",
+          "target": "205.161.3.1",
+          "success": true
+        },
+        {
+          "source": "PC8",
+          "target": "205.161.3.2",
+          "success": true
+        },
+        {
+          "source": "PC8",
+          "target": "205.161.4.1",
+          "success": true
+        },
+        {
+          "source": "PC1",
+          "target": "205.161.4.253",
+          "success": false,
+          "rounds": 1
+        }
+      ]
+    }
+  ]
+}

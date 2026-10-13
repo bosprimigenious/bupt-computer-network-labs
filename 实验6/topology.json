@@ -1,0 +1,11 @@
+{
+  "prefix": "205.161",
+  "address_note": "学号（已隐去；地址参数161），926 % 255 = 161。沿用实验3/4地址规则；此课程专用地址仅用于隔离的模拟/实验局域网。",
+  "physical": "12台设备的接口接入公共以太网交换网络；4台路由transit构成同一广播网络，LAN子网通过各自路由器互通。需至少16个交换端口。",
+  "routers": [
+    {"id": 1, "vendor": "Juniper", "transit_interface": "fe-0/0/0", "lan_interface": "fe-0/0/1", "srx_security": false},
+    {"id": 2, "vendor": "Cisco", "transit_interface": "GigabitEthernet0/0", "lan_interface": "GigabitEthernet0/1"},
+    {"id": 3, "vendor": "H3C", "transit_interface": "GigabitEthernet0/0", "lan_interface": "GigabitEthernet0/1"},
+    {"id": 4, "vendor": "H3C", "transit_interface": "GigabitEthernet0/0", "lan_interface": "GigabitEthernet0/1"}
+  ]
+}

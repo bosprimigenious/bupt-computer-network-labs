@@ -1,0 +1,47 @@
+autostart = False
+[localhost]
+    port = 7200
+    udp = 15000
+    workingdir = ./working
+    [[router SW1]]
+        model = 3640
+        image = ../_环境/ios/unzip-c3640-js-mz.124-10.bin
+        ram = 128
+        mmap = False
+        confreg = 0x2142
+        console = 3004
+        slot1 = NM-16ESW
+        f1/11 = PC1 f0/0
+        f1/12 = PC2 f0/0
+        f1/1 = R1 f0/0
+    [[router R1]]
+        model = 3640
+        image = ../_环境/ios/unzip-c3640-js-mz.124-10.bin
+        ram = 128
+        mmap = False
+        confreg = 0x2142
+        console = 3005
+        slot0 = NM-1FE-TX
+        slot1 = NM-1FE-TX
+        f1/0 = PC3 f0/0
+    [[router PC1]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        mmap = False
+        confreg = 0x2142
+        console = 3006
+    [[router PC2]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        mmap = False
+        confreg = 0x2142
+        console = 3007
+    [[router PC3]]
+        model = 2621
+        image = ../_环境/ios/unzip-c2600-i-mz.121-3.T.bin
+        ram = 20
+        mmap = False
+        confreg = 0x2142
+        console = 3008

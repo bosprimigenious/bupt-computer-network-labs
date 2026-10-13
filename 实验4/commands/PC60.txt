@@ -1,0 +1,10 @@
+enable
+configure terminal
+hostname PC60
+no cdp run
+interface f0/0
+ip address 205.161.60.2 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 205.161.60.1
+end

@@ -1,0 +1,17 @@
+enable
+configure terminal
+hostname SW1
+no cdp run
+interface FastEthernet1/11
+no shutdown
+spanning-tree portfast
+exit
+interface FastEthernet1/12
+no shutdown
+spanning-tree portfast
+exit
+interface FastEthernet1/1
+no shutdown
+spanning-tree portfast
+exit
+end

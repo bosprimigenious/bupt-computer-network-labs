@@ -1,0 +1,1390 @@
+{
+  "startup_wait": 10,
+  "snapshots": {
+    "SW1": [
+      "show vlan-switch brief",
+      "show interfaces trunk",
+      "show spanning-tree"
+    ],
+    "SW2": [
+      "show vlan-switch brief",
+      "show interfaces trunk",
+      "show spanning-tree"
+    ],
+    "SW3": [
+      "show vlan-switch brief",
+      "show interfaces trunk",
+      "show spanning-tree"
+    ],
+    "R1": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "R2": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC20": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC30": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC40": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC50": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC60": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC70": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC80": [
+      "show ip interface brief",
+      "show ip route"
+    ],
+    "PC90": [
+      "show ip interface brief",
+      "show ip route"
+    ]
+  },
+  "captures": [
+    {
+      "device": "SW1",
+      "interface": "f1/2",
+      "name": "R1-dot1q"
+    },
+    {
+      "device": "SW1",
+      "interface": "f1/1",
+      "name": "SW1-SW2-trunk"
+    },
+    {
+      "device": "R2",
+      "interface": "f1/0",
+      "name": "R2-physical-vlan60"
+    },
+    {
+      "device": "R1",
+      "interface": "f0/0",
+      "name": "inter-router"
+    },
+    {
+      "device": "SW3",
+      "interface": "f1/4",
+      "name": "R2-dot1q"
+    },
+    {
+      "device": "R2",
+      "interface": "f2/0",
+      "name": "R2-physical-vlan70"
+    },
+    {
+      "device": "PC20",
+      "interface": "f0/0",
+      "name": "PC20-access"
+    }
+  ],
+  "phases": [
+    {
+      "name": "eight-vlan-two-router-full-mesh",
+      "commands": {},
+      "wait_seconds": 45,
+      "pings": [
+        {
+          "source": "PC20",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        }
+      ],
+      "checks": [
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^20\\s"
+        },
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^30\\s"
+        },
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^40\\s"
+        },
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^50\\s"
+        },
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^60\\s"
+        },
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^70\\s"
+        },
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^80\\s"
+        },
+        {
+          "device": "SW1",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^90\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^20\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^30\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^40\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^50\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^60\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^70\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^80\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^90\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^20\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^30\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^40\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^50\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^60\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^70\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^80\\s"
+        },
+        {
+          "device": "SW3",
+          "command": "show vlan-switch brief",
+          "regex": "(?m)^90\\s"
+        },
+        {
+          "device": "SW2",
+          "command": "show interfaces FastEthernet1/1 switchport",
+          "contains": [
+            "trunk"
+          ]
+        },
+        {
+          "device": "R1",
+          "command": "show ip route",
+          "contains": [
+            "205.161.90.0"
+          ]
+        },
+        {
+          "device": "R2",
+          "command": "show ip route",
+          "contains": [
+            "205.161.20.0"
+          ]
+        },
+        {
+          "device": "SW1",
+          "command": "show interfaces FastEthernet1/11 switchport",
+          "regex": "Access Mode VLAN:\\s+20(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW1",
+          "command": "show interfaces FastEthernet1/12 switchport",
+          "regex": "Access Mode VLAN:\\s+30(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW2",
+          "command": "show interfaces FastEthernet1/11 switchport",
+          "regex": "Access Mode VLAN:\\s+40(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW2",
+          "command": "show interfaces FastEthernet1/12 switchport",
+          "regex": "Access Mode VLAN:\\s+50(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/2 switchport",
+          "regex": "Access Mode VLAN:\\s+60(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/3 switchport",
+          "regex": "Access Mode VLAN:\\s+70(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/11 switchport",
+          "regex": "Access Mode VLAN:\\s+60(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/12 switchport",
+          "regex": "Access Mode VLAN:\\s+70(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/13 switchport",
+          "regex": "Access Mode VLAN:\\s+80(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/14 switchport",
+          "regex": "Access Mode VLAN:\\s+90(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        }
+      ]
+    },
+    {
+      "name": "different-vlan-isolation",
+      "commands": {
+        "PC30": [
+          "configure terminal",
+          "interface f0/0",
+          "ip address 205.161.20.3 255.255.255.0",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 5,
+      "pings": [
+        {
+          "source": "PC20",
+          "target": "205.161.20.3",
+          "success": false,
+          "rounds": 1
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "same-switch-same-vlan",
+      "commands": {
+        "SW1": [
+          "configure terminal",
+          "interface f1/12",
+          "switchport access vlan 20",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 5,
+      "pings": [
+        {
+          "source": "PC20",
+          "target": "205.161.20.3",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "cross-switch-same-vlan",
+      "commands": {
+        "PC40": [
+          "configure terminal",
+          "interface f0/0",
+          "ip address 205.161.20.4 255.255.255.0",
+          "exit",
+          "end"
+        ],
+        "SW2": [
+          "configure terminal",
+          "interface f1/11",
+          "switchport access vlan 20",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 5,
+      "pings": [
+        {
+          "source": "PC20",
+          "target": "205.161.20.4",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        }
+      ],
+      "checks": []
+    },
+    {
+      "name": "same-lan-two-subnets-router-secondary",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface FastEthernet1/0.30",
+          "no ip address",
+          "exit",
+          "interface FastEthernet1/0.20",
+          "ip address 205.161.30.1 255.255.255.0 secondary",
+          "exit",
+          "end"
+        ],
+        "SW1": [
+          "configure terminal",
+          "interface FastEthernet1/12",
+          "switchport access vlan 20",
+          "exit",
+          "end"
+        ],
+        "PC30": [
+          "configure terminal",
+          "interface FastEthernet0/0",
+          "ip address 205.161.30.2 255.255.255.0",
+          "exit",
+          "end"
+        ],
+        "PC40": [
+          "configure terminal",
+          "interface FastEthernet0/0",
+          "ip address 205.161.40.2 255.255.255.0",
+          "exit",
+          "end"
+        ],
+        "SW2": [
+          "configure terminal",
+          "interface FastEthernet1/11",
+          "switchport access vlan 40",
+          "exit",
+          "end"
+        ]
+      },
+      "wait_seconds": 8,
+      "pings": [
+        {
+          "source": "PC20",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        }
+      ],
+      "checks": [
+        {
+          "device": "R1",
+          "command": "show running-config",
+          "contains": [
+            "ip address 205.161.30.1 255.255.255.0 secondary",
+            "ip address 205.161.20.1 255.255.255.0"
+          ]
+        },
+        {
+          "device": "SW1",
+          "command": "show interfaces FastEthernet1/12 switchport",
+          "regex": "Access Mode VLAN:\\s+20(?:\\s|\\()"
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "PC20-access",
+          "filter": "icmp && ip.addr == 205.161.20.2 && ip.addr == 205.161.30.2",
+          "min_packets": 10
+        }
+      ]
+    },
+    {
+      "name": "same-lan-two-subnets-static-outgoing-interface",
+      "commands": {
+        "R1": [
+          "configure terminal",
+          "interface FastEthernet1/0.20",
+          "no ip address 205.161.30.1 255.255.255.0 secondary",
+          "exit",
+          "end"
+        ],
+        "PC20": [
+          "configure terminal",
+          "ip route 205.161.30.0 255.255.255.0 FastEthernet0/0",
+          "end"
+        ],
+        "PC30": [
+          "configure terminal",
+          "ip route 205.161.20.0 255.255.255.0 FastEthernet0/0",
+          "end"
+        ]
+      },
+      "wait_seconds": 5,
+      "pings": [
+        {
+          "source": "PC20",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        }
+      ],
+      "checks": [
+        {
+          "device": "PC20",
+          "command": "show ip arp",
+          "contains": [
+            "205.161.30.2"
+          ]
+        },
+        {
+          "device": "PC30",
+          "command": "show ip arp",
+          "contains": [
+            "205.161.20.2"
+          ]
+        },
+        {
+          "device": "PC20",
+          "command": "show ip route",
+          "regex": "S\\s+205\\.161\\.30\\.0"
+        },
+        {
+          "device": "PC30",
+          "command": "show ip route",
+          "regex": "S\\s+205\\.161\\.20\\.0"
+        }
+      ],
+      "packet_checks": [
+        {
+          "capture": "PC20-access",
+          "filter": "icmp && ip.addr == 205.161.20.2 && ip.addr == 205.161.30.2",
+          "min_packets": 10
+        }
+      ]
+    },
+    {
+      "name": "restore-eight-vlan-full-mesh",
+      "commands": {
+        "PC30": [
+          "configure terminal",
+          "no ip route 205.161.20.0 255.255.255.0 FastEthernet0/0",
+          "interface FastEthernet0/0",
+          "ip address 205.161.30.2 255.255.255.0",
+          "exit",
+          "end"
+        ],
+        "PC40": [
+          "configure terminal",
+          "interface f0/0",
+          "ip address 205.161.40.2 255.255.255.0",
+          "exit",
+          "end"
+        ],
+        "SW1": [
+          "configure terminal",
+          "interface f1/12",
+          "switchport access vlan 30",
+          "exit",
+          "end"
+        ],
+        "SW2": [
+          "configure terminal",
+          "interface f1/11",
+          "switchport access vlan 40",
+          "exit",
+          "end"
+        ],
+        "R1": [
+          "configure terminal",
+          "interface FastEthernet1/0.30",
+          "ip address 205.161.30.1 255.255.255.0",
+          "exit",
+          "end"
+        ],
+        "PC20": [
+          "configure terminal",
+          "no ip route 205.161.30.0 255.255.255.0 FastEthernet0/0",
+          "end"
+        ]
+      },
+      "wait_seconds": 10,
+      "pings": [
+        {
+          "source": "PC20",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC20",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC30",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC40",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC50",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC60",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC70",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC80",
+          "target": "205.161.90.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.20.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.30.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.40.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.50.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.60.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.70.2",
+          "success": true,
+          "rounds": 1
+        },
+        {
+          "source": "PC90",
+          "target": "205.161.80.2",
+          "success": true,
+          "rounds": 1
+        }
+      ],
+      "checks": [
+        {
+          "device": "SW1",
+          "command": "show interfaces FastEthernet1/11 switchport",
+          "regex": "Access Mode VLAN:\\s+20(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW1",
+          "command": "show interfaces FastEthernet1/12 switchport",
+          "regex": "Access Mode VLAN:\\s+30(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW2",
+          "command": "show interfaces FastEthernet1/11 switchport",
+          "regex": "Access Mode VLAN:\\s+40(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW2",
+          "command": "show interfaces FastEthernet1/12 switchport",
+          "regex": "Access Mode VLAN:\\s+50(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/2 switchport",
+          "regex": "Access Mode VLAN:\\s+60(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/3 switchport",
+          "regex": "Access Mode VLAN:\\s+70(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/11 switchport",
+          "regex": "Access Mode VLAN:\\s+60(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/12 switchport",
+          "regex": "Access Mode VLAN:\\s+70(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/13 switchport",
+          "regex": "Access Mode VLAN:\\s+80(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        },
+        {
+          "device": "SW3",
+          "command": "show interfaces FastEthernet1/14 switchport",
+          "regex": "Access Mode VLAN:\\s+90(?:\\s|\\()",
+          "not_regex": "Access Mode VLAN:\\s+1(?:\\s|\\()"
+        }
+      ]
+    }
+  ],
+  "experiment": 4,
+  "student_octet": 161,
+  "student_octet_is_placeholder": false,
+  "expected_devices": 13,
+  "expected_links": 15,
+  "student_id": "（已隐去；地址参数161）",
+  "packet_checks": [
+    {
+      "capture": "R1-dot1q",
+      "filter": "vlan.id == 20 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "R1-dot1q",
+      "filter": "vlan.id == 30 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "R1-dot1q",
+      "filter": "vlan.id == 40 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "R1-dot1q",
+      "filter": "vlan.id == 50 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "SW1-SW2-trunk",
+      "filter": "vlan.id == 40 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "SW1-SW2-trunk",
+      "filter": "vlan.id == 50 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "R2-dot1q",
+      "filter": "vlan.id == 80 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "R2-dot1q",
+      "filter": "vlan.id == 90 && icmp",
+      "min_packets": 2
+    },
+    {
+      "capture": "R2-physical-vlan60",
+      "filter": "icmp && !vlan",
+      "min_packets": 4
+    },
+    {
+      "capture": "R2-physical-vlan70",
+      "filter": "icmp && !vlan",
+      "min_packets": 4
+    },
+    {
+      "capture": "inter-router",
+      "filter": "icmp && !vlan",
+      "min_packets": 10
+    }
+  ]
+}

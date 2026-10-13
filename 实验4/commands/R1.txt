@@ -1,0 +1,32 @@
+enable
+configure terminal
+hostname R1
+no cdp run
+interface f0/0
+ip address 205.161.254.1 255.255.255.252
+no shutdown
+exit
+interface f1/0
+no shutdown
+exit
+interface f1/0.20
+encapsulation dot1q 20
+ip address 205.161.20.1 255.255.255.0
+exit
+interface f1/0.30
+encapsulation dot1q 30
+ip address 205.161.30.1 255.255.255.0
+exit
+interface f1/0.40
+encapsulation dot1q 40
+ip address 205.161.40.1 255.255.255.0
+exit
+interface f1/0.50
+encapsulation dot1q 50
+ip address 205.161.50.1 255.255.255.0
+exit
+ip route 205.161.60.0 255.255.255.0 205.161.254.2
+ip route 205.161.70.0 255.255.255.0 205.161.254.2
+ip route 205.161.80.0 255.255.255.0 205.161.254.2
+ip route 205.161.90.0 255.255.255.0 205.161.254.2
+end

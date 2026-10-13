@@ -1,0 +1,18 @@
+enable
+configure terminal
+hostname R4
+no cdp run
+interface f0/0
+ip address 205.161.4.1 255.255.255.0
+no shutdown
+exit
+interface f1/0
+ip address 205.161.24.2 255.255.255.252
+no shutdown
+exit
+interface f2/0
+ip address 205.161.34.2 255.255.255.252
+no shutdown
+exit
+ip route 205.161.1.0 255.255.255.0 205.161.24.1
+end

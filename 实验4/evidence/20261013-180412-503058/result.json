@@ -1,0 +1,422 @@
+{
+  "status": "NOT READY",
+  "started_at": "2026-10-13T18:04:12.503418+08:00",
+  "topology": "./实验4/topology.net",
+  "gates": {
+    "expected_devices_and_links": true,
+    "ios_boot": true,
+    "idlepc_calibrated_and_applied": true
+  },
+  "devices": {
+    "SW1": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3400
+    },
+    "SW2": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3401
+    },
+    "SW3": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3402
+    },
+    "R1": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3403,
+      "configuration_applied": true
+    },
+    "R2": {
+      "model": "3640",
+      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "console_port": 3404,
+      "configuration_applied": true
+    },
+    "PC20": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3405,
+      "configuration_applied": true
+    },
+    "PC30": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3406,
+      "configuration_applied": true
+    },
+    "PC40": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3407,
+      "configuration_applied": true
+    },
+    "PC50": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3408,
+      "configuration_applied": true
+    },
+    "PC60": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3409,
+      "configuration_applied": true
+    },
+    "PC70": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3410,
+      "configuration_applied": true
+    },
+    "PC80": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3411,
+      "configuration_applied": true
+    },
+    "PC90": {
+      "model": "2621",
+      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "console_port": 3412,
+      "configuration_applied": true
+    }
+  },
+  "pings": [],
+  "errors": [
+    "TimeoutError: SW2 prompt timeout; last output: switchport trunk allowed vlan 1,20,30,40,50,60,70,80,90,1002-1\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b$trunk allowed vlan 1,20,30,40,50,60,70,80,90,1002-10         \b\b\b\b\b\b\b\b\b05\r\nSW2(config-if)#\r\n*Mar  1 00:00:47.643: %DTP-5-TRUNKPORTON: Port Fa1/1 has become dot1q trunk"
+  ],
+  "student_octet": 161,
+  "address_parameter_provisional": false,
+  "specification_sha256": "9f82aa05c7f8ebe2695e478535921084ba2ab190f74e8b01de91c6fa20a1d4e5",
+  "sha256": {
+    "topology": "ce7584658d8ae7bfaca4505077edd3c7090e148373362642706dbb7ce830fe07",
+    "commands": {
+      "SW1": "9c532436e69b487f8a77df2603b997b44860d6d99ef0c3965bb5e9d8f1bfd618",
+      "SW2": "df446ea57e9e1f502cde85a909695e89e6b5905774c88abeee6f04ee67ce6c4e",
+      "SW3": "0e7ca65314efd305f8e8acbc13eaa9e3d0bc3178929e8c5ee8b8682a0469636b",
+      "R1": "1c99215494bee1a056c9c7bb0e1854163f2814d4d7ee09fb32f38fe2305c009e",
+      "R2": "ba671ad9fed29b9ec45316cc293d6203d085e2c12af31934c49b32892cf5e136",
+      "PC20": "c1b744fe842dec7e95b197bdf296b428e82eb0acb1aeb727af1b79b2a05eebe4",
+      "PC30": "8c5e34ec8694fedfab128f4ce5e8ebd68db286bbc42521578eca1b8c0109aebe",
+      "PC40": "7edb1d83cfbd968adf14bd4aff69e9aaac610a6563eedb3f1a9aa3f5cef9be71",
+      "PC50": "937a511d1bf59768395c56cac35c78603a740efa456720af09b139efbca0a4d3",
+      "PC60": "c756363b75d9042e1c184ae868ce42cd912c1a79174aaa849750c9e88791f01f",
+      "PC70": "934dc83e99c4a026cfc84b68592cb80a4938745ffa78ece2ddf59bdc7fcbb363",
+      "PC80": "91fa6c6b2e321a96aa02eef6b77ba27b98a631364324f785f9eb701c64d69c85",
+      "PC90": "a23c5a65b0f4428d9f1ee539b17459b71a6f173482ba4fdb4a57d15839e001ec"
+    },
+    "ios": {
+      "./_环境/ios/unzip-c3640-js-mz.124-10.bin": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
+      "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
+    },
+    "runner": "d53b4055afd10c0d7f4d7851dcd7fabda65cc5b7b76c1e933e78da2a331ddf32",
+    "acceptance": "e760813e5dcb8903820811f3813937b3075cb652b35d8f3508227565569efc91"
+  },
+  "disk_free_before": 678031360,
+  "hypervisor_version": "100-0.2.25-nojit",
+  "links": [
+    [
+      [
+        "SW1",
+        "f1/1"
+      ],
+      [
+        "SW2",
+        "f1/1"
+      ]
+    ],
+    [
+      [
+        "R1",
+        "f1/0"
+      ],
+      [
+        "SW1",
+        "f1/2"
+      ]
+    ],
+    [
+      [
+        "PC20",
+        "f0/0"
+      ],
+      [
+        "SW1",
+        "f1/11"
+      ]
+    ],
+    [
+      [
+        "PC30",
+        "f0/0"
+      ],
+      [
+        "SW1",
+        "f1/12"
+      ]
+    ],
+    [
+      [
+        "SW2",
+        "f1/2"
+      ],
+      [
+        "SW3",
+        "f1/1"
+      ]
+    ],
+    [
+      [
+        "PC40",
+        "f0/0"
+      ],
+      [
+        "SW2",
+        "f1/11"
+      ]
+    ],
+    [
+      [
+        "PC50",
+        "f0/0"
+      ],
+      [
+        "SW2",
+        "f1/12"
+      ]
+    ],
+    [
+      [
+        "R2",
+        "f1/0"
+      ],
+      [
+        "SW3",
+        "f1/2"
+      ]
+    ],
+    [
+      [
+        "R2",
+        "f2/0"
+      ],
+      [
+        "SW3",
+        "f1/3"
+      ]
+    ],
+    [
+      [
+        "R2",
+        "f3/0"
+      ],
+      [
+        "SW3",
+        "f1/4"
+      ]
+    ],
+    [
+      [
+        "PC60",
+        "f0/0"
+      ],
+      [
+        "SW3",
+        "f1/11"
+      ]
+    ],
+    [
+      [
+        "PC70",
+        "f0/0"
+      ],
+      [
+        "SW3",
+        "f1/12"
+      ]
+    ],
+    [
+      [
+        "PC80",
+        "f0/0"
+      ],
+      [
+        "SW3",
+        "f1/13"
+      ]
+    ],
+    [
+      [
+        "PC90",
+        "f0/0"
+      ],
+      [
+        "SW3",
+        "f1/14"
+      ]
+    ],
+    [
+      [
+        "R1",
+        "f0/0"
+      ],
+      [
+        "R2",
+        "f0/0"
+      ]
+    ]
+  ],
+  "captures": [
+    {
+      "nio": "link1_1",
+      "path": "./实验4/evidence/20261013-180412-503058/R1-dot1q.pcap",
+      "name": "R1-dot1q"
+    },
+    {
+      "nio": "link0_0",
+      "path": "./实验4/evidence/20261013-180412-503058/SW1-SW2-trunk.pcap",
+      "name": "SW1-SW2-trunk"
+    },
+    {
+      "nio": "link7_0",
+      "path": "./实验4/evidence/20261013-180412-503058/R2-physical-vlan60.pcap",
+      "name": "R2-physical-vlan60"
+    },
+    {
+      "nio": "link14_0",
+      "path": "./实验4/evidence/20261013-180412-503058/inter-router.pcap",
+      "name": "inter-router"
+    },
+    {
+      "nio": "link9_1",
+      "path": "./实验4/evidence/20261013-180412-503058/R2-dot1q.pcap",
+      "name": "R2-dot1q"
+    },
+    {
+      "nio": "link8_0",
+      "path": "./实验4/evidence/20261013-180412-503058/R2-physical-vlan70.pcap",
+      "name": "R2-physical-vlan70"
+    },
+    {
+      "nio": "link2_0",
+      "path": "./实验4/evidence/20261013-180412-503058/PC20-access.pcap",
+      "name": "PC20-access"
+    }
+  ],
+  "idlepc": {
+    "./_环境/ios/unzip-c3640-js-mz.124-10.bin": {
+      "representative": "SW1",
+      "devices": [
+        "SW1",
+        "SW2",
+        "SW3",
+        "R1",
+        "R2"
+      ],
+      "raw_output": "101 0x604f1484 [5]\n101 0x604f148c [1]\n101 0x604f1490 [3]\n101 0x604f1494 [3]\n101 0x604f1538 [7]\n101 0x604f153c [2]\n101 0x604f1540 [5]\n101 0x604b99e8 [13]\n101 0x604eaf98 [2]\n101 0x604eaf9c [4]\n100-OK",
+      "candidates": [
+        {
+          "pc": "0x604f1484",
+          "count": 5
+        },
+        {
+          "pc": "0x604f148c",
+          "count": 1
+        },
+        {
+          "pc": "0x604f1490",
+          "count": 3
+        },
+        {
+          "pc": "0x604f1494",
+          "count": 3
+        },
+        {
+          "pc": "0x604f1538",
+          "count": 7
+        },
+        {
+          "pc": "0x604f153c",
+          "count": 2
+        },
+        {
+          "pc": "0x604f1540",
+          "count": 5
+        },
+        {
+          "pc": "0x604b99e8",
+          "count": 13
+        },
+        {
+          "pc": "0x604eaf98",
+          "count": 2
+        },
+        {
+          "pc": "0x604eaf9c",
+          "count": 4
+        }
+      ],
+      "selected": {
+        "pc": "0x604b99e8",
+        "count": 13
+      },
+      "applied_responses": {
+        "SW1": "100-OK",
+        "SW2": "100-OK",
+        "SW3": "100-OK",
+        "R1": "100-OK",
+        "R2": "100-OK"
+      }
+    },
+    "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": {
+      "representative": "PC20",
+      "devices": [
+        "PC20",
+        "PC30",
+        "PC40",
+        "PC50",
+        "PC60",
+        "PC70",
+        "PC80",
+        "PC90"
+      ],
+      "raw_output": "101 0x802c06e0 [20]\n101 0x80341194 [21]\n101 0x803561ec [21]\n101 0x80377310 [25]\n100-OK",
+      "candidates": [
+        {
+          "pc": "0x802c06e0",
+          "count": 20
+        },
+        {
+          "pc": "0x80341194",
+          "count": 21
+        },
+        {
+          "pc": "0x803561ec",
+          "count": 21
+        },
+        {
+          "pc": "0x80377310",
+          "count": 25
+        }
+      ],
+      "selected": {
+        "pc": "0x80377310",
+        "count": 25
+      },
+      "applied_responses": {
+        "PC20": "100-OK",
+        "PC30": "100-OK",
+        "PC40": "100-OK",
+        "PC50": "100-OK",
+        "PC60": "100-OK",
+        "PC70": "100-OK",
+        "PC80": "100-OK",
+        "PC90": "100-OK"
+      }
+    }
+  },
+  "finished_at": "2026-10-13T18:07:04.280794+08:00"
+}
