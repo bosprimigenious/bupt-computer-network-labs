@@ -14,7 +14,7 @@
   "devices": {
     "R1": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3601,
       "configuration_applied": true,
       "snapshots": {
@@ -25,7 +25,7 @@
     },
     "R2": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3602,
       "configuration_applied": true,
       "snapshots": {
@@ -36,7 +36,7 @@
     },
     "R3": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3603,
       "configuration_applied": true,
       "snapshots": {
@@ -47,7 +47,7 @@
     },
     "R4": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3604,
       "configuration_applied": true,
       "snapshots": {
@@ -58,55 +58,55 @@
     },
     "PC1": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3611,
       "configuration_applied": true
     },
     "PC2": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3612,
       "configuration_applied": true
     },
     "PC3": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3613,
       "configuration_applied": true
     },
     "PC4": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3614,
       "configuration_applied": true
     },
     "PC5": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3615,
       "configuration_applied": true
     },
     "PC6": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3616,
       "configuration_applied": true
     },
     "PC7": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3617,
       "configuration_applied": true
     },
     "PC8": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3618,
       "configuration_applied": true
     },
     "SW": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3620,
       "configuration_applied": true
     }
@@ -3347,8 +3347,8 @@
       "SW": "a0bb24498568ed8a5b793dd26e523148ed8c1ca90758c163114c0798096ff25c"
     },
     "ios": {
-      "./_环境/ios/unzip-c3640-js-mz.124-10.bin": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
-      "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
+      "./_环境/ios/<本机授权c3640镜像>": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
+      "./_环境/ios/<本机授权c2600镜像>": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
     },
     "runner": "e9ef3225fdebad0372c5b685b14e92b2f22f5be3ca1e807ff2141ac4aee5d8ee",
     "acceptance": "92467c2becf70ccf9fe3ded35f07d166cc6f99cf9d98b9e2cba97cf8e8893eed"
@@ -3524,7 +3524,7 @@
     }
   ],
   "idlepc": {
-    "./_环境/ios/unzip-c3640-js-mz.124-10.bin": {
+    "./_环境/ios/<本机授权c3640镜像>": {
       "representative": "R1",
       "devices": [
         "R1",
@@ -3588,7 +3588,7 @@
         "SW": "100-OK"
       }
     },
-    "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": {
+    "./_环境/ios/<本机授权c2600镜像>": {
       "representative": "PC1",
       "devices": [
         "PC1",

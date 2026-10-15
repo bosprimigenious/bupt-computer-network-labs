@@ -17,37 +17,37 @@
   "devices": {
     "R1": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3300,
       "configuration_applied": true
     },
     "R2": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3301,
       "configuration_applied": true
     },
     "R3": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3302,
       "configuration_applied": true
     },
     "R4": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3303,
       "configuration_applied": true
     },
     "PC1": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3304,
       "configuration_applied": true
     },
     "PC2": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3305,
       "configuration_applied": true
     }
@@ -869,8 +869,8 @@
       "PC2": "9b728996f4b564449e0e6bd34e73b239b6231a104d50942b6539bb74465d8117"
     },
     "ios": {
-      "./_环境/ios/unzip-c3640-js-mz.124-10.bin": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
-      "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
+      "./_环境/ios/<本机授权c3640镜像>": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
+      "./_环境/ios/<本机授权c2600镜像>": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
     },
     "runner": "c2f5b29c1652c07b14155898ea8bd149922d5cf884195ccdbeec2a3f642cc827",
     "acceptance": "e760813e5dcb8903820811f3813937b3075cb652b35d8f3508227565569efc91"
@@ -956,7 +956,7 @@
     }
   ],
   "idlepc": {
-    "./_环境/ios/unzip-c3640-js-mz.124-10.bin": {
+    "./_环境/ios/<本机授权c3640镜像>": {
       "representative": "R1",
       "devices": [
         "R1",
@@ -1018,7 +1018,7 @@
         "R4": "100-OK"
       }
     },
-    "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": {
+    "./_环境/ios/<本机授权c2600镜像>": {
       "representative": "PC1",
       "devices": [
         "PC1",

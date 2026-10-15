@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -30,6 +31,26 @@
 \begin{table}[H]\centering\caption{设备与地址}\begin{tabular}{llll}\toprule
 设备 & 型号 & 接口/连接 & 地址\\\midrule
 PC1 & c2621 & F0/0 & 1.1.1.1/8\\ PC2 & c2621 & F0/0 & 1.1.1.2/8\\ PC3 & c2621 & F0/0 & 1.1.1.3/8\\ SW1 & c3640 & F1/1、F1/2连接SW2 & 二层交换\\ SW2 & c3640 & F1/1、F1/2连接SW1 & 二层交换\\\bottomrule\end{tabular}\end{table}
+\section{设计思路与协议依据}
+本实验把“能启动”与“能通信”分成两个层次。第一层验证Dynamips能够加载IOS、创建console并完成接口配置；第二层验证二层网络的实际转发。只有两层都通过，才把实验判为完成。拓扑故意保留SW1与SW2之间的两条并行链路：如果只接一条链路，虽然也能互ping，却无法观察STP如何选择根桥和阻塞端口。
+
+STP的判断过程可以按三个可观察量解释。首先，交换机比较网桥ID，较小者成为根桥；本次运行中SW1当选根桥。其次，非根交换机为到根桥选择根端口；SW2的F1/2进入forwarding。最后，冗余端口进入blocking，仍然保留拓扑信息但不转发普通数据帧。这样即使两条物理路径同时存在，也不会形成持续的二层广播环路。截图中的根桥、端口角色和端口状态是这一推理链的直接证据。
+
+PC互ping前先发生ARP广播。PC1首次访问PC2时先请求1.1.1.2对应的MAC地址，交换机根据源MAC学习表项并泛洪广播；收到ARP应答后，后续ICMP Echo报文才使用已解析的二层目的地址。由于三个PC均位于1.1.1.0/8，本实验不涉及三层路由选择，因而可以把失败范围缩小到接口、交换表或STP状态。
+\section{配置命令与检查点}
+下表给出本实验每个步骤对应的命令和判断标准。命令文件是最终可执行版本，表中输出字段用于人工复核，运行器的门禁用于自动复核。
+\begin{longtable}{p{0.18\textwidth}p{0.38\textwidth}p{0.32\textwidth}}
+\toprule 步骤 & 主要命令或动作 & 通过判据\\\midrule
+预检 & \texttt{python3 preflight.py} & 设备数、链路数、镜像路径和配置文件全部存在\\
+接口配置 & \texttt{interface F0/0}; \texttt{ip address}; \texttt{no shutdown} & 三台PC接口up，地址与掩码一致\\
+交换端口 & \texttt{switchport mode access}; \texttt{switchport access vlan 1} & PC端口处于access且属于VLAN 1\\
+STP检查 & \texttt{show spanning-tree vlan 1} & SW1为根桥，SW2一端转发、一端阻塞\\
+连通性 & 双向\texttt{ping}并记录丢包 & 18个正向测试均为5/5\\
+负对照 & PC1 ping \texttt{1.1.1.254} & 未配置地址不应收到Echo Reply\\
+证据归档 & 保存console、pcap、result.json & 文件可定位到同一运行目录\\
+\bottomrule
+\end{longtable}
+配置时先完成接口和VLAN，再等待STP收敛，最后执行ping。这个顺序的原因是：如果先测连通性再等STP，初始丢包可能只是拓扑尚未稳定；如果只看配置文本又无法证明真实数据帧已经转发。因此报告同时保留命令回显、协议状态和端到端结果。
 \section{实验过程与截图证据}
 \subsection{拓扑静态预检}
 预检确认设备数量、console端口、五条链路、配置文件和IOS镜像路径均存在。预检只读，不启动设备。
@@ -57,6 +78,14 @@ PC1对未配置的\texttt{1.1.1.254}执行负对照，预期不应收到响应�
 本次证据目录为\texttt{evidence/20261015-102312-868764/}，结果文件为\texttt{result.json}。运行器先在10:15的一次运行中发现IOS异步日志与命令回显拼接导致的提示符匹配超时；修正回显同步后，于10:23从空状态重新启动并取得上述通过结果。失败目录\texttt{evidence/20261015-101551-828933/}仍保留，便于复核问题与修复过程。
 \section{结果分析}
 SW1成为根桥，SW2一条链路转发、另一条链路阻塞，表明STP正确消除了冗余链路带来的环路风险。所有PC位于同一网段，经过ARP解析后可以在二层完成ICMP通信。负对照为0/5，说明不存在对未配置地址的误判。该实验使用模拟器内部链路，不需要实体网线。
+\section{故障记录与修正}
+第一次运行并非直接通过。运行器在等待IOS提示符时，把异步STP/接口日志与刚发送的命令回显拼接在一起，导致严格的整行正则没有匹配到预期提示符；这属于采集同步问题，不是网络协议失败。修正方案是保留原始console文本，把提示符判断改为检查预期回显是否已经出现在缓冲区，再从空状态重新启动全部设备。修正前的证据目录\texttt{evidence/20261015-101551-828933/}和修正后的目录\texttt{evidence/20261015-102312-868764/}同时保留，读者可以比较失败原因与修复效果。
+
+实验中还需要区分“端口阻塞”和“设备停止”。SW2的F1/1为STP blocking并不表示链路断开，查看\texttt{show spanning-tree}时仍应能看到该端口的角色和状态；只有console无响应、接口没有up/up或设备进程退出，才属于模拟器链路故障。本次运行中阻塞端口仍由STP控制，PC互ping通过，符合预期。
+\section{可复现性、边界与改进}
+复现实验时应在项目根目录执行\texttt{./实验1/run.sh 实验1}，确认\texttt{preflight.py}通过后再观察终端图对应的命令顺序。IOS镜像属于本机授权环境，只记录文件哈希和路径，不随代码发布；因此其他机器需要自行准备兼容的c3640/c2621 IOS。Dynamips内部链路不需要实体网线，也不依赖宿主机真实网卡。
+
+本实验的验收范围是二层交换、STP和ICMP。它没有验证真实交换机上的物理链路协商、光电模块兼容性或跨网段路由；这些内容应在后续实验中单独设计。若要增强实验，可增加拔除一条冗余链路后的收敛时间测量、对比不同bridge priority下的根桥选择，并把ARP表、MAC地址表和STP状态在同一时间戳下关联起来。
 \section{实验结论}
 本次实验完成了Dynamips启动、Cisco IOS配置、STP收敛检查、三台PC双向互ping和负对照验证。基于2026年10月15日的真实运行证据，实验一通过。截图、控制台原始日志、拓扑和命令文件共同构成可复核的实验材料。
 \section{证据清单}

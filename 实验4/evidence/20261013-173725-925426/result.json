@@ -13,79 +13,79 @@
   "devices": {
     "SW1": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3400,
       "configuration_applied": true
     },
     "SW2": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3401,
       "configuration_applied": true
     },
     "SW3": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3402,
       "configuration_applied": true
     },
     "R1": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3403,
       "configuration_applied": true
     },
     "R2": {
       "model": "3640",
-      "image": "./_环境/ios/unzip-c3640-js-mz.124-10.bin",
+      "image": "./_环境/ios/<本机授权c3640镜像>",
       "console_port": 3404,
       "configuration_applied": true
     },
     "PC20": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3405,
       "configuration_applied": true
     },
     "PC30": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3406,
       "configuration_applied": true
     },
     "PC40": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3407,
       "configuration_applied": true
     },
     "PC50": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3408,
       "configuration_applied": true
     },
     "PC60": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3409,
       "configuration_applied": true
     },
     "PC70": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3410,
       "configuration_applied": true
     },
     "PC80": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3411,
       "configuration_applied": true
     },
     "PC90": {
       "model": "2621",
-      "image": "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin",
+      "image": "./_环境/ios/<本机授权c2600镜像>",
       "console_port": 3412,
       "configuration_applied": true
     }
@@ -3477,8 +3477,8 @@
       "PC90": "a23c5a65b0f4428d9f1ee539b17459b71a6f173482ba4fdb4a57d15839e001ec"
     },
     "ios": {
-      "./_环境/ios/unzip-c3640-js-mz.124-10.bin": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
-      "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
+      "./_环境/ios/<本机授权c3640镜像>": "2aeff0ae67a73c65d7e670aaa57abaeb3c7604c9ad4c582c20062fb535586696",
+      "./_环境/ios/<本机授权c2600镜像>": "c46fb745bae31382c3d0f48551c41883c618ea3d41b726a2ea656cf1f7757d24"
     },
     "runner": "c2f5b29c1652c07b14155898ea8bd149922d5cf884195ccdbeec2a3f642cc827",
     "acceptance": "60fc3cf92f66c81d4e4db299a94be714913e80bcadaeca574ce17f4ab08a4cca"
@@ -3669,7 +3669,7 @@
     }
   ],
   "idlepc": {
-    "./_环境/ios/unzip-c3640-js-mz.124-10.bin": {
+    "./_环境/ios/<本机授权c3640镜像>": {
       "representative": "SW1",
       "devices": [
         "SW1",
@@ -3733,7 +3733,7 @@
         "R2": "100-OK"
       }
     },
-    "./_环境/ios/unzip-c2600-i-mz.121-3.T.bin": {
+    "./_环境/ios/<本机授权c2600镜像>": {
       "representative": "PC20",
       "devices": [
         "PC20",
