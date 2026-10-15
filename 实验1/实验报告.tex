@@ -92,6 +92,18 @@ SW1成为根桥，SW2一条链路转发、另一条链路阻塞，表明STP正�
 本实验的验收范围是二层交换、STP和ICMP。它没有验证真实交换机上的物理链路协商、光电模块兼容性或跨网段路由；这些内容应在后续实验中单独设计。若要增强实验，可增加拔除一条冗余链路后的收敛时间测量、对比不同bridge priority下的根桥选择，并把ARP表、MAC地址表和STP状态在同一时间戳下关联起来。
 \section{实验结论}
 本次实验完成了Dynamips启动、Cisco IOS配置、STP收敛检查、三台PC双向互ping和负对照验证。基于2026年10月15日的真实运行证据，实验一通过。截图、控制台原始日志、拓扑和命令文件共同构成可复核的实验材料。
+\section{阶段验收表}
+\begin{longtable}{p{0.34\textwidth}p{0.20\textwidth}p{0.34\textwidth}}
+\toprule 阶段 & 状态 & 证据/说明\\\midrule
+环境依赖与IOS镜像 & 通过 & Dynamips、Python、TShark和授权镜像预检通过\\
+拓扑与链路创建 & 通过 & 五台设备、五条链路、console端口均可连接\\
+接口和VLAN配置 & 通过 & 三台PC地址/掩码正确，交换端口为VLAN1 access\\
+STP根桥选择 & 通过 & SW1为根桥，SW2显示根端口和指定端口\\
+STP阻塞冗余链路 & 通过 & SW2 F1/1 blocking，F1/2 forwarding\\
+六方向互ping & 通过 & 18轮正向测试均为5/5\\
+负对照与证据归档 & 通过 & 1.1.1.254为0/5，result.json和日志保存\\
+\bottomrule
+\end{longtable}
 \section{证据清单}
 \begin{itemize}\item \texttt{lab1.net}：自有实验拓扑；\item \texttt{commands/}：五台设备配置命令；\item \texttt{preflight.py}：拓扑静态预检；\item \texttt{evidence/20261015-102312-868764/result.json}：最终门禁、ping结果、配置哈希和运行信息；\item \texttt{截图/}：本次实际运行的步骤终端证据图。\end{itemize}
 \section{参考资料与附录}

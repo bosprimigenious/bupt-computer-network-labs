@@ -38,6 +38,17 @@ PPP串口抓包至少应出现链路层PPP帧和上层ICMP请求/应答；PC两�
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{READY}。
 \section{结论}
 本实验已取得完整通过证据，结论可由结果JSON、控制台日志和抓包文件复核。
+\section{阶段验收表}
+\begin{longtable}{p{0.34\textwidth}p{0.20\textwidth}p{0.34\textwidth}}\toprule 阶段 & 状态 & 证据/说明\\\midrule
+设备与链路启动 & 通过 & 4台设备、3条链路\\
+PPP/LCP与DCE时钟 & 通过 & 串口up/up、LCP Open、115200\\
+静态路由 & 通过 & 两端路由表出现远端LAN\\
+双向互ping与PPP抓包 & 通过 & 两方向5/5，77个ICMP记录\\\\\bottomrule\end{longtable}
+\section{关键命令附录}
+\begin{longtable}{p{0.25\textwidth}p{0.55\textwidth}}\toprule 检查目的 & 关键命令\\\midrule
+接口状态 & \texttt{show interfaces Serial1/1}\\
+路由表 & \texttt{show ip route}\\
+连通性 & \texttt{ping 10.2.2.2}\\\\\bottomrule\end{longtable}
 \section{参考资料}
 本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
 \section{附录：可复现命令与证据索引}

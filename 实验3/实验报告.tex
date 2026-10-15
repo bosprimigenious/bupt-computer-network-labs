@@ -38,6 +38,21 @@ OSPF广播网络先形成邻居关系，再同步数据库。需要区分FULL邻
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{NOT READY}。
 \section{结论}
 本实验的拓扑、命令和部分阶段已经实现，但存在未通过门禁或外部环境阻塞；本报告记录当前证据，不能将其表述为完整通过。
+\section{阶段验收表}
+\begin{longtable}{p{0.34\textwidth}p{0.20\textwidth}p{0.34\textwidth}}\toprule 阶段 & 状态 & 证据/说明\\\midrule
+静态路由下一跳 & 有阶段证据 & show route、ARP和ping已记录\\
+静态路由出接口 & 有阶段证据 & 依赖ARP/Proxy ARP的差异已记录\\
+RIP默认水平分割 & 有阶段证据 & debug与show protocol已记录\\
+RIP链路故障 & 部分证据 & 曾记录备用路径阶段，最新运行被异步输出打断\\
+关闭水平分割对照 & 未完整验收 & 需重新跑完阶段并比较更新\\
+OSPF广播网络 & 未完整验收 & 初始邻居/连通性未稳定\\
+OSPF点到点与故障恢复 & 未完整验收 & 完整12阶段聚合门禁未通过\\\\\bottomrule\end{longtable}
+\section{关键命令附录}
+\begin{longtable}{p{0.25\textwidth}p{0.55\textwidth}}\toprule 检查目的 & 关键命令\\\midrule
+路由表 & \texttt{show ip route}\\
+协议状态 & \texttt{show ip protocols}\\
+邻居/ARP & \texttt{show ip arp}\\
+调试 & \texttt{debug ip rip / debug ip ospf events}\\\\\bottomrule\end{longtable}
 \section{参考资料}
 本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
 \section{附录：可复现命令与证据索引}

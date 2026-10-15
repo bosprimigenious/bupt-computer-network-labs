@@ -35,6 +35,19 @@ endpoints.example.json只给出字段格式，不包含真实地址、端口和�
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{NOT READY}。
 \section{结论}
 本实验的拓扑、命令和部分阶段已经实现，但存在未通过门禁或外部环境阻塞；本报告记录当前证据，不能将其表述为完整通过。
+\section{阶段验收表}
+\begin{longtable}{p{0.34\textwidth}p{0.20\textwidth}p{0.34\textwidth}}\toprule 阶段 & 状态 & 证据/说明\\\midrule
+三厂商拓扑与命令生成 & 通过 & 配置生成器输出完成\\
+Cisco功能预演 & 通过 & OSPF、56方向ping、抓包\\
+Juniper真实端点 & 未通过 & 没有镜像或console端点\\
+H3C真实端点 & 未通过 & 没有镜像或console端点\\
+三厂商综合互ping & 未执行 & 真实端点host为空\\\\\bottomrule\end{longtable}
+\section{关键命令附录}
+\begin{longtable}{p{0.25\textwidth}p{0.55\textwidth}}\toprule 检查目的 & 关键命令\\\midrule
+配置生成 & \texttt{python3 实验6/generate.py}\\
+OSPF & \texttt{show ip ospf neighbor}\\
+路由 & \texttt{show ip route ospf}\\
+远端验收 & \texttt{python3 实验6/verify\_remote.py}\\\\\bottomrule\end{longtable}
 \section{参考资料}
 本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
 \section{附录：可复现命令与证据索引}

@@ -36,6 +36,21 @@ R1-dot1q和SW1-SW2-trunk用于观察802.1Q标签；R2-physical-vlan60/70用于�
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{NOT READY}。
 \section{结论}
 本实验的拓扑、命令和部分阶段已经实现，但存在未通过门禁或外部环境阻塞；本报告记录当前证据，不能将其表述为完整通过。
+\section{阶段验收表}
+\begin{longtable}{p{0.34\textwidth}p{0.20\textwidth}p{0.34\textwidth}}\toprule 阶段 & 状态 & 证据/说明\\\midrule
+八VLAN和双路由器全互通 & 未通过 & 全VLAN mesh门禁未通过\\
+不同VLAN隔离 & 有阶段证据 & 隔离对照已记录\\
+同交换机同VLAN & 有阶段证据 & 部分阶段通过\\
+跨交换机同VLAN & 未完整验收 & trunk阶段受回显问题影响\\
+同LAN多IP方法一 & 未完整验收 & secondary阶段待重跑\\
+同LAN多IP方法二 & 未完整验收 & 出接口静态路由阶段待重跑\\
+恢复配置与56方向复验 & 未通过 & 聚合7阶段未完成\\\\\bottomrule\end{longtable}
+\section{关键命令附录}
+\begin{longtable}{p{0.25\textwidth}p{0.55\textwidth}}\toprule 检查目的 & 关键命令\\\midrule
+VLAN表 & \texttt{show vlan-switch brief}\\
+Trunk & \texttt{show interfaces trunk}\\
+端口 & \texttt{show interfaces f1/11 switchport}\\
+路由 & \texttt{show ip route}\\\\\bottomrule\end{longtable}
 \section{参考资料}
 本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
 \section{附录：可复现命令与证据索引}

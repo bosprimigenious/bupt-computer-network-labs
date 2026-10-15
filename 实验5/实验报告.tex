@@ -38,6 +38,22 @@ HTTP测试使用真实TCP socket：客户端向代理发送绝对URI，代理建
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{READY}。
 \section{结论}
 本实验已取得完整通过证据，结论可由结果JSON、控制台日志和抓包文件复核。
+\section{阶段验收表}
+\begin{longtable}{p{0.34\textwidth}p{0.20\textwidth}p{0.34\textwidth}}\toprule 阶段 & 状态 & 证据/说明\\\midrule
+同网ARP与ICMP & 通过 & ARP请求/应答和Echo\\
+跨网ARP、TTL和MAC变化 & 通过 & 两LAN抓包对照\\
+TTL超时ICMP11 & 通过 & traceroute和抓包字段\\
+不可达ICMP3 & 通过 & 无路由目的地址\\
+静态ARP添加/删除 & 通过 & show arp前后对照\\
+重复IP隔离 & 通过 & 重复地址和MAC竞争证据\\
+唯一地址恢复 & 通过 & 恢复后重新ping\\
+HTTP代理流程 & 通过 & 真实socket事件；TCP BPF为限制项\\\\\bottomrule\end{longtable}
+\section{关键命令附录}
+\begin{longtable}{p{0.25\textwidth}p{0.55\textwidth}}\toprule 检查目的 & 关键命令\\\midrule
+ARP & \texttt{show arp}\\
+路由 & \texttt{show ip route}\\
+ICMP & \texttt{ping / traceroute}\\
+抓包 & \texttt{tshark -r <capture>.pcap}\\\\\bottomrule\end{longtable}
 \section{参考资料}
 本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
 \section{附录：可复现命令与证据索引}
