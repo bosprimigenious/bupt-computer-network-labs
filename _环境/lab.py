@@ -82,7 +82,7 @@ class Console:
                 answered = True
             if startup and "press return to get started" in chunk.lower():
                 self.writer.write("\r\n")
-            if PROMPT.search(data) and (expected_echo is None or re.search(r"(?:^|[\r\n])(?:[\w.-]+(?:\([^\r\n]*\))?[>#])?" + re.escape(expected_echo), data)):
+            if PROMPT.search(data) and (expected_echo is None or expected_echo in data):
                 return data
         raise TimeoutError(self.name + " prompt timeout; last output: " + data[-500:])
 

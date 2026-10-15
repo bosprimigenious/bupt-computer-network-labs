@@ -1,0 +1,64 @@
+\documentclass[UTF8,a4paper,12pt]{ctexart}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.4em}
+\sloppy
+\lstset{basicstyle=\ttfamily\small,breaklines=true,frame=single,columns=fullflexible}
+\newcommand{\shot}[2]{\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/#1}\caption{#2}\end{figure}}
+\title{计算机网络技术实践实验一报告\\\large 基于Dynamips与Cisco IOS的交换网络配置}
+\author{学号：已隐去}
+\date{2026年10月15日}
+\begin{document}
+\maketitle
+\begin{abstract}
+本实验使用Dynamips hypervisor加载真实Cisco IOS，构建两台交换机、三台PC和两条交换机冗余链路的二层网络。报告记录环境安装、拓扑预检、IOS启动、命令配置、STP收敛、互ping和负对照的完整过程。所有终端图均来自2026年10月15日的实际运行输出；最终18次正向测试均为5/5，未配置地址负对照为0/5。
+\end{abstract}
+\section{实验目的}
+\begin{enumerate}\item 掌握Cisco交换机基本启动、接口和二层转发配置。\item 在双链路冗余拓扑中观察生成树协议（STP）的转发与阻塞状态。\item 使用三台PC的双向ICMP测试验证同一二层网络的连通性。\item 通过负对照和原始控制台日志确认验收结果可复核。\end{enumerate}
+\section{实验环境}
+本实验在macOS arm64上完成。运行环境为Dynamips 0.2.25-nojit、Cisco IOS、Python 3.11、TShark 4.6.9。两份IOS镜像只从本机授权文件加载，未上传到公开仓库。运行入口为\texttt{./run.sh 实验1}，拓扑文件为\texttt{lab1.net}，设备命令位于\texttt{commands/}。
+\shot{01-环境安装.png}{环境依赖安装输出。}
+\section{拓扑与地址规划}
+实验包含两台c3640交换机和三台c2621模拟PC。SW1与SW2之间配置两条冗余链路；PC1、PC2接入SW1，PC3接入SW2。实验使用VLAN 1和\texttt{1.1.1.0/8}地址段。
+\begin{table}[H]\centering\caption{设备与地址}\begin{tabular}{llll}\toprule
+设备 & 型号 & 接口/连接 & 地址\\\midrule
+PC1 & c2621 & F0/0 & 1.1.1.1/8\\ PC2 & c2621 & F0/0 & 1.1.1.2/8\\ PC3 & c2621 & F0/0 & 1.1.1.3/8\\ SW1 & c3640 & F1/1、F1/2连接SW2 & 二层交换\\ SW2 & c3640 & F1/1、F1/2连接SW1 & 二层交换\\\bottomrule\end{tabular}\end{table}
+\section{实验过程与截图证据}
+\subsection{拓扑静态预检}
+预检确认设备数量、console端口、五条链路、配置文件和IOS镜像路径均存在。预检只读，不启动设备。
+\shot{02-拓扑预检.png}{拓扑与镜像静态预检。}
+\subsection{启动Dynamips与Cisco IOS}
+运行器创建并启动SW1、SW2、PC1、PC2、PC3，随后通过Python telnetlib3连接各设备console，等待Cisco IOS提示符。Dynamips为本次运行创建独立working目录，结束时只关闭本次启动的进程。
+\shot{03-Dynamips启动.png}{Dynamips hypervisor启动记录。}
+\subsection{下发IOS配置}
+交换机配置接入口为access模式并保持VLAN 1；三台PC配置IP地址和掩码。完整命令文件见\texttt{commands/SW1.txt}、\texttt{commands/SW2.txt}和PC配置文件。
+\shot{04-IOS配置.png}{SW1真实Cisco IOS配置命令与回显。}
+\subsection{查看STP状态}
+等待65秒使STP收敛后执行\texttt{show spanning-tree vlan 1}。SW1为根桥；SW2的F1/1进入blocking，F1/2保持forwarding，冗余链路因此不会形成二层环路。
+\shot{05-STP状态.png}{SW1的STP根桥与转发端口输出。}
+\shot{05b-STP阻塞.png}{SW2的STP阻塞与转发端口输出。}
+\subsection{终端互ping}
+运行器先进行ARP预热，再对PC1、PC2、PC3执行六个方向的互ping，每个方向连续三轮，每轮发送5个ICMP请求。
+\shot{06-互ping.png}{真实IOS终端互ping结果摘要。}
+\subsection{负对照与总验收}
+PC1对未配置的\texttt{1.1.1.254}执行负对照，预期不应收到响应。最终结果由运行器写入\texttt{result.json}，并检查设备启动、配置、接口、STP和ping等门禁。
+\shot{07-验收结果.png}{本次实验最终验收输出。}
+\section{实验结果}
+\begin{table}[H]\centering\caption{2026年10月15日实际验收结果}\begin{tabular}{ll}\toprule
+验收项目 & 结果\\\midrule
+五台设备、五条链路 & 通过\\ IOS启动与配置 & 通过\\ PC接口和地址掩码 & 通过\\ STP转发/阻塞 & 通过\\ 六个方向、18轮正向ping & 18/18轮为5/5\\ 未配置地址负对照 & 0/5\\ 运行器退出与证据保存 & 通过\\\bottomrule\end{tabular}\end{table}
+本次证据目录为\texttt{evidence/20261015-102312-868764/}，结果文件为\texttt{result.json}。运行器先在10:15的一次运行中发现IOS异步日志与命令回显拼接导致的提示符匹配超时；修正回显同步后，于10:23从空状态重新启动并取得上述通过结果。失败目录\texttt{evidence/20261015-101551-828933/}仍保留，便于复核问题与修复过程。
+\section{结果分析}
+SW1成为根桥，SW2一条链路转发、另一条链路阻塞，表明STP正确消除了冗余链路带来的环路风险。所有PC位于同一网段，经过ARP解析后可以在二层完成ICMP通信。负对照为0/5，说明不存在对未配置地址的误判。该实验使用模拟器内部链路，不需要实体网线。
+\section{实验结论}
+本次实验完成了Dynamips启动、Cisco IOS配置、STP收敛检查、三台PC双向互ping和负对照验证。基于2026年10月15日的真实运行证据，实验一通过。截图、控制台原始日志、拓扑和命令文件共同构成可复核的实验材料。
+\section{证据清单}
+\begin{itemize}\item \texttt{lab1.net}：自有实验拓扑；\item \texttt{commands/}：五台设备配置命令；\item \texttt{preflight.py}：拓扑静态预检；\item \texttt{evidence/20261015-102312-868764/result.json}：最终门禁、ping结果、配置哈希和运行信息；\item \texttt{截图/}：本次实际运行的步骤终端证据图。\end{itemize}
+\end{document}
