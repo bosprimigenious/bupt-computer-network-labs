@@ -4,7 +4,7 @@
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \setlength{\parindent}{2em}\setlength{\parskip}{0.45em}\sloppy
 \newcommand{\shot}[2]{\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/#1}\caption{#2}\end{figure}}
-\title{计算机网络技术实践实验五报告\\\large ARP、ICMP与HTTP代理过程分析}
+\title{计算机网络技术实践实验五报告\\large ARP、ICMP与HTTP代理过程分析}
 \author{学号：已隐去}
 \date{2026年10月15日}
 \begin{document}\maketitle
@@ -13,21 +13,34 @@
 本实验把ARP、ICMP、TTL耗尽、不可达、静态ARP、重复IP隔离和HTTP代理放在一个可重复拓扑中，通过真实抓包区分二层广播、三层转发和应用层TCP流程。
 \section{拓扑与地址规划}
 拓扑包含R1、SW1、PC1、PC2、PC3。PC1/PC2位于10.5.1.0/24，PC3位于10.5.2.0/24，R1负责跨网转发。client-lan和remote-lan分别绑定Dynamips NIO并保存pcap。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/01-拓扑配置.png}\caption{实验五拓扑和抓包接口摘要。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/01-拓扑配置.png}\caption{实验五拓扑和抓包接口摘要。}\end{figure}\clearpage
 \section{ARP与ICMP过程}
 同网阶段清理ARP后发起ping，观察ARP请求/应答和ICMP echo；跨网阶段观察PC只解析默认网关MAC，路由器转发后重新封装二层头。静态ARP阶段验证缓存，重复IP阶段验证异常地址隔离，再恢复唯一地址。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/02-ARP与ICMP.png}\caption{PC1实际控制台中的ICMP测试。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/02-ARP与ICMP.png}\caption{PC1实际控制台中的ICMP测试。}\end{figure}\clearpage
+\section{同网与跨网的判别}
+同网目标的ARP请求直接询问目标IP；跨网目标则询问默认网关，目标IP保持不变而每一跳MAC地址变化。报告以client-lan和remote-lan两个抓包点对照同一ICMP序号，解释二层头变化和TTL递减。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/05-TTL超时.png}\caption{跨网traceroute与TTL超时阶段。}\end{figure}\clearpage
 \section{TTL与不可达}
 traceroute或低TTL报文用于观察真实ICMP type 11；无路由目的地址用于观察ICMP type 3。TShark按字段解析抓包，并使用first occurrence避免嵌套原始ICMP头造成重复匹配。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/03-抓包分析.png}\caption{抓包分析门禁、TTL和MAC变化摘要。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/03-抓包分析.png}\caption{抓包分析门禁、TTL和MAC变化摘要。}\end{figure}\clearpage
+\section{静态ARP与不可达}
+静态ARP阶段先写入指定IP/MAC，再用show arp确认类型和地址；删除后再次检查缓存。访问10.99.99.99用于区分“目的主机不响应”和“路由器生成不可达”，截图记录实际IOS回显，不能套用Windows行为描述。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/06-不可达与静态ARP.png}\caption{不可达与ARP操作的实际输出。}\end{figure}\clearpage
+\section{重复IP隔离与恢复}
+PC2临时改为PC1地址后清理R1 ARP缓存，观察同一IP对应多个MAC的竞争；恢复PC2为10.5.1.3后重新清理缓存并ping。该阶段的价值是验证异常配置确实能被观察到，并证明恢复操作没有污染后续阶段。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/07-重复IP恢复.png}\caption{重复IP阶段与恢复配置。}\end{figure}\clearpage
 \section{HTTP代理}
 HTTP测试使用真实TCP socket：客户端向代理发送绝对URI，代理建立到origin的第二条TCP连接，改写为origin-form并按顺序返回响应。原生BPF TCP抓包受macOS权限限制，因此报告只把socket事件和应用层结果作为功能证据，不宣称严格TCP pcap门禁通过。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/04-HTTP代理.png}\caption{HTTP代理功能结果。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/04-HTTP代理.png}\caption{HTTP代理功能结果。}\end{figure}\clearpage
 \section{结果分析}
 2026年10月13日的完整运行8个阶段、9个ping结果、两份pcap、ARP/ICMP分析和HTTP功能钩子均通过，result.json为READY。该结论针对记录的模拟器和运行器版本；若要求原生TCP pcap，需要在有BPF权限的环境重新运行。
 \section{截图与证据边界}
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{READY}。
 \section{结论}
 本实验已取得完整通过证据，结论可由结果JSON、控制台日志和抓包文件复核。
+\section{参考资料}
+本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
+\section{附录：可复现命令与证据索引}
+在项目根目录执行\texttt{./run.sh 实验5}可启动本实验；运行器会新建时间戳证据目录并保存console、result.json及可用抓包。若门禁失败，应保留失败目录，修正后从空状态重新运行。
 
 \end{document}

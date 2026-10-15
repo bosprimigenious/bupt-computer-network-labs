@@ -4,7 +4,7 @@
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \setlength{\parindent}{2em}\setlength{\parskip}{0.45em}\sloppy
 \newcommand{\shot}[2]{\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/#1}\caption{#2}\end{figure}}
-\title{计算机网络技术实践实验四报告\\\large VLAN、Trunk与VLAN间路由}
+\title{计算机网络技术实践实验四报告\\large VLAN、Trunk与VLAN间路由}
 \author{学号：已隐去}
 \date{2026年10月15日}
 \begin{document}\maketitle
@@ -13,19 +13,32 @@
 本实验配置至少三台交换机、两台路由器和八个业务VLAN，验证access、802.1Q trunk、同VLAN跨交换机通信、不同VLAN隔离，以及两种同LAN多IP互联方法。业务VLAN不使用VLAN 1。
 \section{拓扑与地址规划}
 本设计使用SW1、SW2、SW3，R1、R2和PC20、PC30、PC40、PC50、PC60、PC70、PC80、PC90。地址前缀按学号规则使用205.161；VLAN 20、30、40、50在R1侧，VLAN 60、70、80、90在R2侧，路由器间使用独立互联网段。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/01-VLAN配置.png}\caption{SW1真实IOS VLAN配置输出。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/01-VLAN配置.png}\caption{SW1真实IOS VLAN配置输出。}\end{figure}\clearpage
 \section{VLAN和Trunk配置思路}
 先建立业务VLAN并配置access端口，再建立SW1-SW2、SW2-SW3和路由器子接口trunk；trunk允许列表显式包含业务VLAN和IOS默认VLAN，避免NM-16ESW拒绝不完整列表。最后配置R1/R2子接口和物理接口两种互联路径。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/02-Trunk状态.png}\caption{Trunk状态检查命令与回显。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/02-Trunk状态.png}\caption{Trunk状态检查命令与回显。}\end{figure}\clearpage
+\section{Access端口与终端归属}
+access端口决定终端进入哪个广播域，PC20/30分别接入VLAN20/30。先用show interfaces switchport确认Administrative/Operational Mode和Access Mode VLAN，再做ping；否则同一交换机上的失败可能来自端口仍在VLAN1，而不是路由器配置。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/05-Access端口.png}\caption{SW1接入口的实际状态。}\end{figure}\clearpage
+\section{子接口与两种互联方法}
+R1通过dot1Q子接口承载VLAN20、30、40、50；R2同时使用物理access接口承载VLAN60/70，并用子接口承载VLAN80/90。这样报告可以对比带标签的trunk路径、物理access路径和跨路由器无标签链路。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/06-路由器子接口.png}\caption{R1子接口配置片段。}\end{figure}\clearpage
 \section{分阶段验证}
 验收顺序为八VLAN双路由全互通、不同VLAN隔离、同交换机同VLAN、跨交换机同VLAN、同LAN多IP方法一、方法二和恢复配置。每个阶段保留ping和show vlan/trunk/route输出，并采集dot1q、trunk、物理VLAN及路由器互联抓包。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/03-VLAN互ping.png}\caption{已记录阶段和互通门禁摘要。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/03-VLAN互ping.png}\caption{已记录阶段和互通门禁摘要。}\end{figure}\clearpage
+\section{抓包与标签变化}
+R1-dot1q和SW1-SW2-trunk用于观察802.1Q标签；R2-physical-vlan60/70用于观察access链路去标签；inter-router用于确认跨路由器转发。抓包点与命令输出必须对应到同一阶段，不能用另一次运行的pcap替代。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/07-抓包点.png}\caption{实验四抓包点和阶段摘要。}\end{figure}\clearpage
 \section{当前结果与问题}
 当前最完整记录完成3/7阶段，初始部分VLAN互通和隔离阶段有证据，但八VLAN全互通门禁未通过。后续运行遇到DTP异步日志、长命令回显和磁盘写入问题，不能把部分通过写成完整通过；需修正命令回显同步后从空状态重跑七阶段。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/04-验收状态.png}\caption{实验四当前NOT READY边界。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/04-验收状态.png}\caption{实验四当前NOT READY边界。}\end{figure}\clearpage
 \section{截图与证据边界}
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{NOT READY}。
 \section{结论}
 本实验的拓扑、命令和部分阶段已经实现，但存在未通过门禁或外部环境阻塞；本报告记录当前证据，不能将其表述为完整通过。
+\section{参考资料}
+本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
+\section{附录：可复现命令与证据索引}
+在项目根目录执行\texttt{./run.sh 实验4}可启动本实验；运行器会新建时间戳证据目录并保存console、result.json及可用抓包。若门禁失败，应保留失败目录，修正后从空状态重新运行。
 
 \end{document}

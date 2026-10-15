@@ -4,7 +4,7 @@
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \setlength{\parindent}{2em}\setlength{\parskip}{0.45em}\sloppy
 \newcommand{\shot}[2]{\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/#1}\caption{#2}\end{figure}}
-\title{计算机网络技术实践实验六报告\\\large Cisco、Juniper与H3C综合互联设计}
+\title{计算机网络技术实践实验六报告\\large Cisco、Juniper与H3C综合互联设计}
 \author{学号：已隐去}
 \date{2026年10月15日}
 \begin{document}\maketitle
@@ -13,18 +13,31 @@
 实验六要求在一个综合网络中互联Cisco、Juniper和H3C，并验证动态路由学习、远端LAN路由和多台PC互ping。我们把配置生成、远端只读验收和Cisco功能预演分开，避免把单一厂商模拟结果伪装成三厂商结果。
 \section{自有拓扑与地址规划}
 设计包含4台路由器和8台PC。transit共享网段使用205.161.255.0/24，四个路由器LAN分别使用205.161.1.0/24至205.161.4.0/24，LAN网关尾号254。R1为Juniper、R2为Cisco、R3/R4为H3C；现场接口名称需按实际设备确认。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/01-配置生成.png}\caption{自有多厂商配置命令示例。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/01-配置生成.png}\caption{自有多厂商配置命令示例。}\end{figure}\clearpage
 \section{配置生成与验收方法}
 generate.py从topology.json生成各厂商命令，覆盖保护避免误写已有内容。真实验收工具只读采集version、接口、邻居、路由和PC互ping，不保存密码、不自动改写设备。真实端点文件必须由实验室设备信息填充。
+\section{厂商命令差异}
+Juniper使用Junos层级配置和commit check，Cisco使用IOS interface/router ospf语法，H3C使用Comware接口和OSPF语法。生成器把共同的地址和OSPF意图映射到三种命令族，报告必须把“共同设计”和“厂商语法差异”分开描述。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/04-厂商命令差异.png}\caption{Juniper命令生成示例。}\end{figure}\clearpage
 \section{Cisco功能预演}
 cisco-proxy使用本地Cisco IOS模拟4路由器、8PC和OSPF，检查3条远端路由、邻居和56方向互ping，并采集OSPF/ICMP。预演用于验证地址规划和验收逻辑，不能替代Juniper/H3C。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/02-Cisco预演.png}\caption{Cisco-only proxy的实际验收摘要。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/02-Cisco预演.png}\caption{Cisco-only proxy的实际验收摘要。}\end{figure}\clearpage
+\section{预演门禁与真实门禁}
+Cisco预演检查OSPF邻居、远端LAN路由、56方向互ping和负对照；真实三厂商验收还要检查厂商身份、接口、至少两条FULL邻居、三条远端路由以及八台PC端点。两层门禁不能合并成一个“成功”字段。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/05-OSPF预演状态.png}\caption{Cisco OSPF预演门禁摘要。}\end{figure}\clearpage
+\section{端点文件与部署前提}
+endpoints.example.json只给出字段格式，不包含真实地址、端口和密码。部署前需要由实验室提供12个console端点或等价的现场日志；自动工具只读采集，不能在没有端点时凭配置生成结果宣称通过。
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/06-真实验收输入.png}\caption{真实设备端点文件的字段边界。}\end{figure}\clearpage
 \section{三厂商阻塞与结论}
 真实验收result.json显示配置生成成功，但所有远端端点host为null，real\_three\_vendor门禁为false并返回2。当前没有Juniper/H3C镜像或实验室连接信息，因此实验六总体NOT READY。取得合法镜像或12个console端点后，先部署并手工确认接口，再运行verify\_remote.py。
-\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/03-三厂商验收.png}\caption{真实三厂商端点缺失的硬阻塞。}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.96\textwidth]{截图/03-三厂商验收.png}\caption{真实三厂商端点缺失的硬阻塞。}\end{figure}\clearpage
 \section{截图与证据边界}
 本报告的终端图由本项目实际Dynamips/Cisco IOS运行日志和验收JSON生成，原始证据目录保留在本实验的\texttt{evidence/}中。截图展示命令与回显，不把上游报告结果当作本实验结果。当前状态为\textbf{NOT READY}。
 \section{结论}
 本实验的拓扑、命令和部分阶段已经实现，但存在未通过门禁或外部环境阻塞；本报告记录当前证据，不能将其表述为完整通过。
+\section{参考资料}
+本实验依据本地课程讲义、项目内的topology/specification/commands文件和实际证据目录。上游开源仓库只用于比较章节组织与协议思路，报告原文、截图和他人实验结果不作为本次证据。
+\section{附录：可复现命令与证据索引}
+在项目根目录执行\texttt{./run.sh 实验6}可启动本实验；运行器会新建时间戳证据目录并保存console、result.json及可用抓包。若门禁失败，应保留失败目录，修正后从空状态重新运行。
 
 \end{document}
